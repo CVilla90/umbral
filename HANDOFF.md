@@ -325,10 +325,21 @@ and the `pct: null` "lista no cargada" path renders with real data.
 reads as "everyone scored identically" instead of "we can't say". Every
 percentage divides by the attempt's **own** stored max, never a constant.
 
-**Still to do in Phase 3:** gain, items, manage, roster upload.
-> **Roster upload is the highest-value one left**: without it every participation
-> figure stays a count instead of a percentage, and Carlos is the one professor
-> who can actually supply class lists.
+**Roster upload done** (`/admin/lista`, parser in `lib/roster.ts`, 11 tests).
+⚠️ **Delimiter is DETECTED, not assumed** — Spanish Excel exports `;` because the
+comma is its decimal separator. BOM stripped, header optional, quoted fields
+survive. ⚠️ **Bad lines are reported with line numbers, never skipped** — a
+silently dropped student becomes a false `sin empezar` and gets chased for
+something they did. Writing is a **second, separate action**; only the groups
+present in the pasted text are replaced. Verified end to end in a browser: the
+participation column flipped from `1 (lista no cargada)` to **33.3 %** and a
+`sin empezar` row appeared. ⚠️ **Bug found only by clicking both buttons:** an
+uncontrolled textarea whose `defaultValue` changed between renders gets **reset
+by React**, so Revisar wiped the text and Guardar said "Pega la lista primero".
+Controlled now. Neither the type system nor the parser tests could see it.
+⚠️ The dev DB now contains 3 test roster rows (incl. a fake `349999 Marta Pérez`).
+
+**Still to do in Phase 3:** gain, items, manage.
 **Then Phase 4:** exit window logic, complement-form serving, gain reveal on the
 result screen, paired export.
 
