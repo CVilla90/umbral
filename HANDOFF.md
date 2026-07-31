@@ -320,7 +320,15 @@ so Carlos must create it by hand.**
 Verified live: page 200, CSV carries its UTF-8 BOM, endpoint 403s with no session,
 and the `pct: null` "lista no cargada" path renders with real data.
 
-**Still to do in Phase 3:** scores, gain, items, manage, roster upload.
+**Scores page done** (`/admin/puntajes`) on a new pure, unit-tested `lib/stats.ts`
+(14 tests). ⚠️ **Sample SD (n−1)**, and **n < 2 → `sd: null`, never 0** — "0"
+reads as "everyone scored identically" instead of "we can't say". Every
+percentage divides by the attempt's **own** stored max, never a constant.
+
+**Still to do in Phase 3:** gain, items, manage, roster upload.
+> **Roster upload is the highest-value one left**: without it every participation
+> figure stays a count instead of a percentage, and Carlos is the one professor
+> who can actually supply class lists.
 **Then Phase 4:** exit window logic, complement-form serving, gain reveal on the
 result screen, paired export.
 
