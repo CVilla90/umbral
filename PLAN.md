@@ -777,15 +777,34 @@ screen · windows seeded · anchor pool authored · item validator green.
 
 Beat its own scope in one respect and missed it in another: **all four level
 banks** landed rather than just 1–2 (the port was mechanical once the exporter
-existed), but the **deploy** did not happen — the repo is not initialized yet.
+existed), but the **deploy** did not happen.
 
-### Phase 2 — completion, by ~2026-08-24 (listening: see the §3.2 warning)
+**Still open as of 2026-07-31.** The git repo is now initialized locally with one
+commit under the CVilla90 identity, but nothing is pushed and nothing is
+deployed. This is the oldest unfinished work in the project and the only work
+with a hard deadline — see the warning under Phase 2.
+
+### Phase 2 — completion ✅ **DONE 2026-07-31**, budgeted for ~2026-08-24
 
 Speaking end to end (needs Carlos's live smoke test) · listening clips generated
 and registered in `LISTENING` · the `maxTotal` reconciliation.
 
 > Ordering note: the `maxTotal` decision is upstream of both. Settle it first —
 > it decides whether listening is a task or a deletion.
+
+Landed roughly three weeks early, which is the only reason there is any slack to
+argue about below. `maxTotal` settled at **37** (listening authored, not deleted);
+speaking proven against the live API and then by hand with a real microphone.
+
+> **⚠️ Finish Phase 1's deploy before starting Phase 3.** The phases are numbered
+> by dependency, not by preference, and the deploy is the one item carrying a
+> hard external date (**2026-08-10**). It is also the only remaining work whose
+> blockers live *outside this repo* — a GitHub repo that must be created by hand
+> on the CVilla90 account, the Google console redirect URI, Replit Postgres and
+> Secrets — so its latency is Carlos's calendar rather than build time. The
+> dashboard is pure code, blocks nothing, and displays nothing until students have
+> submitted. Build it while the external blockers are outstanding, not instead of
+> clearing them.
 
 ### Phase 3 — dashboard + exports, through September
 
