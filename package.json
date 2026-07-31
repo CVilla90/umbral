@@ -1,0 +1,42 @@
+{
+  "name": "umbral",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "eslint",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "postinstall": "prisma generate",
+    "db:dev": "node tools/dev-db.mjs",
+    "db:push": "prisma db push",
+    "db:seed": "node --env-file-if-exists=.env tools/seed.mjs",
+    "db:studio": "prisma studio",
+    "bank:export": "node tools/export_bank.mjs"
+  },
+  "dependencies": {
+    "@google/genai": "^2.9.0",
+    "@prisma/client": "^6.19.3",
+    "jose": "^6.2.3",
+    "next": "16.2.9",
+    "react": "19.2.4",
+    "react-dom": "19.2.4"
+  },
+  "devDependencies": {
+    "@electric-sql/pglite": "^0.5.4",
+    "@electric-sql/pglite-socket": "^0.2.7",
+    "@tailwindcss/postcss": "^4",
+    "@types/node": "^20",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "eslint": "^9",
+    "eslint-config-next": "16.2.9",
+    "prisma": "^6.19.3",
+    "tailwindcss": "^4",
+    "typescript": "^5",
+    "vitest": "^4.1.9"
+  }
+}

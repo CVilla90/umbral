@@ -1,0 +1,288 @@
+// Umbral — entry/exit English measurement, UACH FCCF.
+//
+// Design of record: PLAN.md §5. Two rules shape everything here:
+//
+//   1. An attempt is IMMUTABLE once submitted, and carries `itemSnapshot` — the
+//      exact items and option order served. A content edit in 2027 must never
+//      retroactively change what a 2026 student was asked.
+//   2. Nothing derived is stored. Gain, percentages and cohort means are computed
+//      at query time, so fixing a scoring rule reflows history instead of
+//      stranding it.
+//
+// Ships on Replit with its Postgres (DATABASE_URL provided by Replit); locally
+// `npm run db:dev` serves an embedded PGlite on the same URL shape.
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+/// A person who signed in. Google-only, `@uach.mx`-only (PLAN §6.1) — there is no
+/// password column because there is no password path. `role` is convenience; the
+/// real admin gate is the ADMIN_EMAILS allowlist checked server-side on every
+/// admin route.
+model User {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  googleId  String   @unique
+  name      String?
+  image     String?
+  role      String   @default("student") // "student" | "admin"
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  enrollments Enrollment[]
+
+  @@index([email])
+}
+
+/// An academic period. Windows hang off it; everything else is scoped through it,
+/// so "Ene-Jun 2027" is a row the admin creates, never a deploy.
+model Semester {
+  id       String   @id @default(cuid())
+  label    String   @unique // "Ago-Dic 2026"
+  startsOn DateTime @db.Date
+  endsOn   DateTime @db.Date
+  isActive Boolean  @default(false)
+
+  windows     Window[]
+  groups      GroupAssignment[]
+  enrollments Enrollment[]
+  roster      RosterEntry[]
+
+  @@index([isActive])
+}
+
+/// When a phase is open. Admin-editable dates, pausable, cancellable (PLAN §4.1).
+/// `status` is deliberately separate from the dates so "pause right now" does not
+/// destroy the schedule it is pausing.
+model Window {
+  id         String   @id @default(cuid())
+  semesterId String
+  semester   Semester @relation(fields: [semesterId], references: [id], onDelete: Cascade)
+  phase      String // "entry" | "exit"
+  opensAt    DateTime
+  closesAt   DateTime
+  status     String   @default("draft") // "draft" | "open" | "paused" | "closed"
+
+  attempts Attempt[]
+
+  @@unique([semesterId, phase])
+  @@index([status])
+}
+
+/// Kept as its own table (not a string on Enrollment) precisely because free text
+/// yields six spellings of one person — PLAN §6.2.
+model Professor {
+  id       String  @id @default(cuid())
+  name     String
+  email    String? @unique
+  isActive Boolean @default(true)
+
+  groups      GroupAssignment[]
+  enrollments Enrollment[]
+
+  @@index([isActive])
+}
+
+/// The AUTHORITATIVE professor mapping: semester x english level x group.
+/// Carlos maintains it in the admin; `Enrollment.professorId` resolves from here,
+/// and is re-resolvable in bulk when a mapping is filled in late.
+model GroupAssignment {
+  id           String    @id @default(cuid())
+  semesterId   String
+  semester     Semester  @relation(fields: [semesterId], references: [id], onDelete: Cascade)
+  englishLevel Int // 1-4
+  group        String // "A".."G"
+  professorId  String
+  professor    Professor @relation(fields: [professorId], references: [id])
+
+  @@unique([semesterId, englishLevel, group])
+  @@index([professorId])
+}
+
+/// An uploaded class list. **Optional, and expected to stay partial forever.**
+///
+/// Umbral only learns a student exists once they sign in, so without a roster the
+/// attendance export can say who participated but never who didn't. Carlos can
+/// upload his own groups easily; other professors' groups are much harder to get
+/// and are not worth blocking the feature on (Carlos, 2026-07-30).
+///
+/// So coverage is per GROUP, not global: a group with roster lines gets a real
+/// participation denominator, a group without them gets a "who showed up" list and
+/// no percentage. `lib/exports.ts` enforces that distinction — see `mergeRoster`.
+model RosterEntry {
+  id           String   @id @default(cuid())
+  semesterId   String
+  semester     Semester @relation(fields: [semesterId], references: [id], onDelete: Cascade)
+  englishLevel Int // 1-4
+  group        String // "A".."G"
+  matricula    String
+  fullName     String?
+  createdAt    DateTime @default(now())
+
+  /// Uniqueness is per semester, not global: a student legitimately reappears
+  /// next semester in a different group.
+  @@unique([semesterId, matricula])
+  @@index([semesterId, englishLevel, group])
+}
+
+/// One student, one semester: the ficha (PLAN §8.2) plus the form assignment.
+///
+/// `formOrder` is the whole counterbalancing design in one column (PLAN §2.1):
+/// assigned "AB" or "BA" at random exactly once, entry serves [0], exit serves [1].
+/// Repeat prevention is therefore structural — there is no per-student item ledger
+/// to keep in sync.
+model Enrollment {
+  id         String   @id @default(cuid())
+  userId     String
+  user       User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  semesterId String
+  semester   Semester @relation(fields: [semesterId], references: [id], onDelete: Cascade)
+
+  // ficha
+  matricula        String
+  fullName         String
+  age              Int?
+  gender           String? // "F" | "M" | "O" | "N" (prefiere no decir)
+  academicSemester Int // 1-8
+  group            String // "A".."G"
+  englishLevel     Int // 1-4 — decides which bank is served
+  professorRaw     String? // what the student picked/typed, verbatim, cross-check only
+  professorId      String?
+  professor        Professor? @relation(fields: [professorId], references: [id])
+
+  formOrder String // "AB" | "BA"
+  consentAt DateTime
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  attempts Attempt[]
+
+  @@unique([userId, semesterId])
+  @@index([semesterId, englishLevel, group])
+  @@index([professorId])
+}
+
+/// One sitting. `@@unique([enrollmentId, windowId])` is the "one attempt per
+/// window" rule; the admin reopen action deletes-and-audits rather than mutating.
+///
+/// Raw scores only. Percentages and gain are computed on read (see the header note).
+model Attempt {
+  id           String     @id @default(cuid())
+  enrollmentId String
+  enrollment   Enrollment @relation(fields: [enrollmentId], references: [id], onDelete: Cascade)
+  windowId     String
+  window       Window     @relation(fields: [windowId], references: [id], onDelete: Cascade)
+
+  form         String // "A" | "B" — derived from enrollment.formOrder + window.phase
+  englishLevel Int
+  state        String @default("in_progress") // in_progress | submitted | auto_submitted
+
+  /// Seeds the per-attempt option shuffle. Stored so the exact paper a student saw
+  /// can be reconstructed for review — PLAN §2.3. Without the shuffle, the bank
+  /// inherits "option c is never the answer" from the printed exams.
+  optionSeed Int
+
+  /// The exact item ids served, in order, frozen at start. THE field for
+  /// longitudinal integrity.
+  itemSnapshot Json
+
+  startedAt      DateTime  @default(now())
+  lastActivityAt DateTime  @default(now())
+  submittedAt    DateTime?
+
+  anchorRaw  Int?
+  levelRaw   Int?
+  totalRaw   Int?
+  maxAnchor  Int?
+  maxLevel   Int?
+  maxTotal   Int?
+  durationMs Int?
+  completed  Boolean @default(false)
+
+  responses Response[]
+
+  @@unique([enrollmentId, windowId])
+  @@index([windowId, state])
+  @@index([englishLevel, form])
+}
+
+/// One row per item served. Written as the student answers (so a dropped
+/// connection resumes, never restarts) and frozen when the attempt submits.
+///
+/// `msElapsed` is MEASURED, never enforced — there is no countdown anywhere in
+/// this app (PLAN §13). It is a covariate, not a constraint.
+model Response {
+  id        String  @id @default(cuid())
+  attemptId String
+  attempt   Attempt @relation(fields: [attemptId], references: [id], onDelete: Cascade)
+
+  itemId String
+  block  String // anchor | listening | grammar | truefalse | match | gapfill | reading | speaking
+  type   String // mcq | tf | match | open | speaking
+  raw    Json? // the student's response, shape depends on `type`
+
+  correct   Boolean @default(false)
+  points    Int     @default(0)
+  maxPoints Int     @default(1)
+
+  msElapsed  Int?
+  skipped    Boolean @default(false)
+  /// no_mic | permission_denied | chose_skip | window_closed — separates
+  /// "couldn't" from "wouldn't", which is free now and unrecoverable later.
+  skipReason String?
+  triesUsed  Int     @default(0)
+
+  speakingCalls SpeakingCall[]
+
+  @@unique([attemptId, itemId])
+  @@index([itemId])
+  @@index([block])
+}
+
+/// Audit trail for every Gemini audio call: what it cost, whether it worked, and
+/// who made it. The per-attempt ceiling is 4 (2 items x 2 tries) and it is enforced
+/// server-side from these rows — the client is never trusted with a counter.
+model SpeakingCall {
+  id         String   @id @default(cuid())
+  responseId String
+  response   Response @relation(fields: [responseId], references: [id], onDelete: Cascade)
+  /// The model that ANSWERED on success; the model that was tried first on
+  /// failure. Never null, so grouping by model always partitions every row.
+  model      String
+  bytes      Int
+  /// CLIENT-REPORTED clip length. Advisory only — it is not a security control,
+  /// because a hostile client can report anything. `bytes` is the enforced cap.
+  audioMs    Int?
+  latencyMs  Int?
+  /// Underlying Gemini requests this one student-facing analysis cost, retries
+  /// and model fallback included. One row is one analysis; `apiCalls` is what it
+  /// actually spent, which is not the same number on a flaky tier (PLAN §7).
+  apiCalls   Int      @default(1)
+  ok         Boolean
+  errorCode  String?
+  at         DateTime @default(now())
+
+  @@index([at])
+  @@index([ok])
+}
+
+/// Every admin action that changes data or reveals identifiers. Exports with
+/// identifiers turned on write a row here (PLAN §9).
+model AdminAudit {
+  id         String   @id @default(cuid())
+  actorEmail String
+  action     String
+  targetType String?
+  targetId   String?
+  payload    Json?
+  at         DateTime @default(now())
+
+  @@index([at])
+  @@index([actorEmail])
+}

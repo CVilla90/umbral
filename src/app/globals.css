@@ -1,0 +1,218 @@
+@import "tailwindcss";
+
+/*
+ * Umbral design tokens.
+ *
+ * The visual world is MEASUREMENT INSTRUMENTS, not "language app" — because the
+ * audience is Ciencias de la Cultura Física, where measure-at-preseason /
+ * train / measure-again is already native vocabulary. Cool precise ground, one
+ * hot marker colour, and nothing else competing.
+ */
+@theme {
+  /* Blued near-black. Text and dark surfaces — never pure #000, which reads flat
+     next to the cool paper. */
+  --color-ink: #101a24;
+  --color-ink-soft: #1c2a38;
+
+  /* Deliberately NOT cream (#F4F1EA and its neighbours are the default warm
+     editorial ground). Pulled cool-green so it reads as graph paper and gym
+     chalk rather than as a magazine. */
+  --color-paper: #f1f3ef;
+  --color-paper-lift: #f7f8f6;
+  --color-card: #ffffff;
+
+  --color-graphite: #55646f;
+  --color-rule: #cbd3ce;
+  --color-rule-soft: #dee3df;
+
+  /* The marker. Safety orange — stopwatch button, lane cone, the chalk mark on a
+     tape. Reserved for exactly two things: a measurement mark, and the primary
+     action. If it appears anywhere else, delete it. */
+  --color-mark: #ff5a1f;
+  --color-mark-deep: #e8460d;
+  --color-mark-soft: #ffe6da;
+
+  /* Text and icons sitting ON the marker. Its own token rather than a literal
+     `text-white`, so re-palletting is genuinely one file: a paler `--color-mark`
+     would make hardcoded white text vanish, and the contrast failure would be
+     invisible until someone tried to read a button. */
+  --color-on-mark: #ffffff;
+
+  /* The span between two marks — i.e. the thing this whole instrument exists to
+     produce. Deep instrument blue. */
+  --color-span: #12556e;
+  --color-span-soft: #dbe9ef;
+}
+
+@theme inline {
+  --font-display: var(--font-archivo);
+  --font-sans: var(--font-karla);
+  --font-mono: var(--font-plex-mono);
+}
+
+html {
+  scroll-behavior: smooth;
+  background: var(--color-paper);
+}
+
+body {
+  background: var(--color-paper);
+  color: var(--color-ink);
+  font-family: var(--font-karla), system-ui, -apple-system, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Display face is set tight and heavy; at 800 with default tracking Archivo reads
+   like a generic UI grotesque, and the industrial character is entirely in the
+   negative tracking. */
+.font-display {
+  font-family: var(--font-archivo), system-ui, sans-serif;
+  letter-spacing: -0.035em;
+}
+
+/* Utility face: tick labels, eyebrows, scores, timestamps. Always uppercase and
+   letterspaced — engraved-scale behaviour, not body text. */
+.label {
+  font-family: var(--font-plex-mono), ui-monospace, monospace;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  font-size: 0.6875rem;
+  font-weight: 500;
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-mark);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+::selection {
+  background: var(--color-mark);
+  color: #fff;
+}
+
+/* ------------------------------------------------------------------ *
+ * The load sequence for `la cinta` (the measuring tape in the hero).
+ *
+ * One orchestrated moment, then stillness. The marks overshoot and settle like a
+ * needle on a gauge — that settle is the whole personality of the page, so
+ * nothing else on it is allowed to move on load.
+ * ------------------------------------------------------------------ */
+
+@keyframes tape-draw {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
+@keyframes mark-land {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, -22px);
+  }
+  55% {
+    opacity: 1;
+    transform: translate(-50%, 4px);
+  }
+  78% {
+    transform: translate(-50%, -2px);
+  }
+  100% {
+    opacity: 1;
+    transform: translate(-50%, 0);
+  }
+}
+
+@keyframes span-grow {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes fade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.anim-rise {
+  animation: rise 0.7s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+.anim-fade {
+  animation: fade 0.6s ease-out both;
+}
+.anim-tape {
+  transform-origin: left center;
+  animation: tape-draw 0.7s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+.anim-mark {
+  animation: mark-land 0.6s cubic-bezier(0.34, 1.4, 0.5, 1) both;
+}
+.anim-span {
+  transform-origin: left center;
+  animation: span-grow 0.7s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+/* The one looping animation in Umbral, and the only place a loop is honest: an
+   indeterminate wait, on the speaking screen, while Gemini transcribes. It is
+   allowed to break the "nothing else moves" rule because it is the sole signal
+   that a request which can take tens of seconds has not died. */
+@keyframes sweep {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(300%);
+  }
+}
+
+.anim-sweep {
+  animation: sweep 1.4s cubic-bezier(0.45, 0, 0.55, 1) infinite;
+}
+
+/* A student on a bad connection or with vestibular sensitivity gets the finished
+   instrument, not a degraded one: every animated element already carries its
+   final geometry, so removing the animation is enough. */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-delay: 0ms !important;
+    transition-duration: 0.001ms !important;
+  }
+
+  /* Every other animated element carries its final geometry, so stripping the
+     animation leaves it correct. The sweep is the exception: its final frame is
+     deliberately off-screen, so the blanket rule above would leave a student
+     staring at an EMPTY track during the one wait we most need to look alive.
+     Give it the whole track, motionless. */
+  .anim-sweep {
+    animation: none !important;
+    width: 100%;
+    transform: none;
+  }
+}

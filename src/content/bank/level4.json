@@ -1,0 +1,748 @@
+{
+ "level": 4,
+ "course": "Inglés IV",
+ "cefr": "B1–B2",
+ "lessons": 20,
+ "forms": {
+  "A": {
+   "level": 4,
+   "form": "A",
+   "blocks": [
+    {
+     "block": "grammar",
+     "title": "Gramática",
+     "instruction": "Elige la opción correcta.",
+     "items": [
+      {
+       "id": "l4a-gr1",
+       "type": "mcq",
+       "points": 1,
+       "tag": "U1 L1 - Present perfect and past perfect",
+       "stem": "I couldn't take any photos because I ______ my phone at home.",
+       "choices": [
+        "have left",
+        "had left",
+        "leaving"
+       ],
+       "correct": 1
+      },
+      {
+       "id": "l4a-gr2",
+       "type": "mcq",
+       "points": 1,
+       "tag": "U1 L5 - Reported speech: time and place references",
+       "stem": "\"I will see you tomorrow,\" Jane said.  ->  Jane said that she would see me ______ .",
+       "choices": [
+        "tomorrow",
+        "the following day",
+        "that day"
+       ],
+       "correct": 1
+      },
+      {
+       "id": "l4a-gr3",
+       "type": "mcq",
+       "points": 1,
+       "tag": "U2 L4 - I wish / If only: present regrets",
+       "stem": "If only my car ______ less gasoline!",
+       "choices": [
+        "spends",
+        "will spend",
+        "spent"
+       ],
+       "correct": 2
+      },
+      {
+       "id": "l4a-gr4",
+       "type": "mcq",
+       "points": 1,
+       "tag": "U3 L2 - Present continuous with future reference",
+       "stem": "I can't play on Saturday. I ______ my grandparents this weekend.",
+       "choices": [
+        "am visiting",
+        "visit",
+        "will visiting"
+       ],
+       "correct": 0
+      },
+      {
+       "id": "l4a-gr5",
+       "type": "mcq",
+       "points": 1,
+       "tag": "U4 L1 - Phrasal verbs",
+       "stem": "I can't ______ with this noise any longer. I'm going to complain.",
+       "choices": [
+        "put on",
+        "put off",
+        "put up"
+       ],
+       "correct": 2
+      },
+      {
+       "id": "l4a-gr6",
+       "type": "mcq",
+       "points": 1,
+       "tag": "U4 L5 - Adverbs of place",
+       "stem": "I have looked in every room, but I can't find my glasses ______ .",
+       "choices": [
+        "somewhere",
+        "anywhere",
+        "everywhere"
+       ],
+       "correct": 1
+      }
+     ]
+    },
+    {
+     "block": "truefalse",
+     "title": "¿Está bien escrito?",
+     "instruction": "Decide si la oración es correcta en inglés.",
+     "items": [
+      {
+       "id": "l4a-tf1",
+       "type": "tf",
+       "points": 1,
+       "sentence": "She said that she was working in a laboratory.",
+       "correct": true
+      },
+      {
+       "id": "l4a-tf2",
+       "type": "tf",
+       "points": 1,
+       "sentence": "He told me to don't open the window.",
+       "correct": false
+      },
+      {
+       "id": "l4a-tf3",
+       "type": "tf",
+       "points": 1,
+       "sentence": "Whatever happens, don't turn off the recorder.",
+       "correct": true
+      },
+      {
+       "id": "l4a-tf4",
+       "type": "tf",
+       "points": 1,
+       "sentence": "I couldn't find my passport nowhere.",
+       "correct": false
+      }
+     ]
+    },
+    {
+     "block": "match",
+     "title": "Relaciona",
+     "instruction": "Une cada palabra con su definición.",
+     "items": [
+      {
+       "id": "l4a-match1",
+       "type": "match",
+       "points": 6,
+       "pairs": [
+        {
+         "left": "patent",
+         "right": "The legal right that stops other people from copying an invention."
+        },
+        {
+         "left": "startup",
+         "right": "A very new company, usually built around one new idea."
+        },
+        {
+         "left": "delayed",
+         "right": "The word on the screen when a flight leaves later than its scheduled time."
+        },
+        {
+         "left": "surveillance",
+         "right": "The activity of watching a place carefully in order to keep it safe."
+        },
+        {
+         "left": "brand",
+         "right": "The name and image that make a company's products recognizable."
+        },
+        {
+         "left": "interview",
+         "right": "A meeting in which one person asks another a series of questions."
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "block": "gapfill",
+     "title": "Completa el texto",
+     "instruction": "Escribe la palabra que falta. Puedes usar el banco de palabras.",
+     "items": [
+      {
+       "id": "l4a-gap1",
+       "type": "gap",
+       "points": 5,
+       "tag": "Text A — The camera on the front door",
+       "wordBank": [
+        "anywhere",
+        "had listened",
+        "had never used",
+        "have to",
+        "postponing",
+        "that day",
+        "to buy",
+        "told"
+       ],
+       "segments": [
+        {
+         "kind": "text",
+         "value": "My aunt lives alone, and until last year she "
+        },
+        {
+         "kind": "blank",
+         "n": 1,
+         "answer": "had never used",
+         "accepted": [
+          "had never used"
+         ]
+        },
+        {
+         "kind": "text",
+         "value": " any kind of security system. In March somebody broke into a house on her street, so she finally decided "
+        },
+        {
+         "kind": "blank",
+         "n": 2,
+         "answer": "to buy",
+         "accepted": [
+          "to buy"
+         ]
+        },
+        {
+         "kind": "text",
+         "value": " a camera for her front door. She kept "
+        },
+        {
+         "kind": "blank",
+         "n": 3,
+         "answer": "postponing",
+         "accepted": [
+          "postponing"
+         ]
+        },
+        {
+         "kind": "text",
+         "value": " the installation because she was sure it was complicated. When the technician arrived, he "
+        },
+        {
+         "kind": "blank",
+         "n": 4,
+         "answer": "told",
+         "accepted": [
+          "told"
+         ]
+        },
+        {
+         "kind": "text",
+         "value": " her that the whole job would take twenty minutes, and he was right. She called me "
+        },
+        {
+         "kind": "blank",
+         "n": 5,
+         "answer": "that day",
+         "accepted": [
+          "that day"
+         ]
+        },
+        {
+         "kind": "text",
+         "value": " and asked me "
+        },
+        {
+         "kind": "filled",
+         "value": "whether"
+        },
+        {
+         "kind": "text",
+         "value": " I wanted one too. I said that I "
+        },
+        {
+         "kind": "filled",
+         "value": "would"
+        },
+        {
+         "kind": "text",
+         "value": " think about it. Eight months have passed, and I "
+        },
+        {
+         "kind": "filled",
+         "value": "haven't bought"
+        },
+        {
+         "kind": "text",
+         "value": " mine yet."
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "block": "reading",
+     "title": "Lectura",
+     "instruction": "Lee el texto y responde.",
+     "passage": {
+      "title": "The Machine That Learned to Translate",
+      "paragraphs": [
+       "In 1954, a computer at Georgetown University translated sixty Russian sentences into English. The scientists announced that translation would be solved in three or four years. They were wrong by about half a century.",
+       "The first systems worked with rules: somebody had to write down the grammar of both languages, word by word. The results were famous for being funny rather than useful. Everything changed when engineers stopped teaching computers grammar and started showing them examples instead. A modern system has read millions of pages that human translators had already translated, and it copies the patterns it finds.",
+       "Today a free application on your phone can translate a menu or an email in less than a second. Professional translators use these tools every day, and most of them say the same thing: the machine gives you a first draft, and then the real work begins.",
+       "The problem is that a language is not only a system of words. A joke, a legal contract and a poem all need somebody who understands who is speaking, to whom, and why. A machine can produce a correct sentence; whether it produces the right one is a different question."
+      ]
+     },
+     "items": [
+      {
+       "id": "l4a-rd-mc1",
+       "type": "mcq",
+       "points": 1,
+       "stem": "What did the computer at Georgetown do in 1954?",
+       "choices": [
+        "It wrote down the grammar of two languages.",
+        "It translated sixty Russian sentences into English.",
+        "It read millions of pages of translation."
+       ],
+       "correct": 1
+      },
+      {
+       "id": "l4a-rd-mc2",
+       "type": "mcq",
+       "points": 1,
+       "stem": "According to the text, what do most professional translators say?",
+       "choices": [
+        "That the machine gives them a first draft.",
+        "That they never use these tools.",
+        "That the machine is funny but never useful."
+       ],
+       "correct": 0
+      },
+      {
+       "id": "l4a-rd-op1",
+       "type": "open",
+       "points": 1,
+       "stem": "How long did the scientists of 1954 think the problem would take?",
+       "accepted": [
+        "Three or four years."
+       ],
+       "model": "Three or four years."
+      }
+     ]
+    },
+    {
+     "block": "speaking",
+     "title": "Habla",
+     "instruction": "Graba tu respuesta. Unos segundos bastan.",
+     "items": [
+      {
+       "id": "l4a-sp1",
+       "type": "speaking",
+       "points": 1,
+       "target": "past perfect",
+       "stem": "What is something you had never done before you started university?",
+       "accepted": [],
+       "model": "Before I started university, I had never lived away from my family.",
+       "maxSeconds": 20
+      },
+      {
+       "id": "l4a-sp2",
+       "type": "speaking",
+       "points": 1,
+       "target": "be able to",
+       "stem": "What is something you are not able to do yet, but want to learn?",
+       "accepted": [],
+       "model": "I am not able to swim very well yet, but I want to learn.",
+       "maxSeconds": 20
+      }
+     ]
+    }
+   ]
+  },
+  "B": {
+   "level": 4,
+   "form": "B",
+   "blocks": [
+    {
+     "block": "grammar",
+     "title": "Gramática",
+     "instruction": "Elige la opción correcta.",
+     "items": [
+      {
+       "id": "l4b-gr1",
+       "type": "mcq",
+       "points": 1,
+       "tag": "lesson 1",
+       "stem": "When we got to the theater, the movie ______ already started.",
+       "choices": [
+        "has",
+        "was",
+        "had"
+       ],
+       "correct": 2
+      },
+      {
+       "id": "l4b-gr2",
+       "type": "mcq",
+       "points": 1,
+       "tag": "lesson 5",
+       "stem": "\"I saw him here yesterday,\" she said.  ->  She said that she had seen him ______ the previous day.",
+       "choices": [
+        "here",
+        "that place",
+        "there"
+       ],
+       "correct": 2
+      },
+      {
+       "id": "l4b-gr3",
+       "type": "mcq",
+       "points": 1,
+       "tag": "lesson 9",
+       "stem": "I wish this laptop ______ so slow.",
+       "choices": [
+        "weren't",
+        "isn't",
+        "won't be"
+       ],
+       "correct": 0
+      },
+      {
+       "id": "l4b-gr4",
+       "type": "mcq",
+       "points": 1,
+       "tag": "lesson 12",
+       "stem": "We ______ dinner with the investors on Friday.",
+       "choices": [
+        "have",
+        "are having",
+        "will having"
+       ],
+       "correct": 1
+      },
+      {
+       "id": "l4b-gr5",
+       "type": "mcq",
+       "points": 1,
+       "tag": "lesson 16",
+       "stem": "It isn't easy to ______ up children and work full time.",
+       "choices": [
+        "take",
+        "give",
+        "bring"
+       ],
+       "correct": 2
+      },
+      {
+       "id": "l4b-gr6",
+       "type": "mcq",
+       "points": 1,
+       "tag": "lesson 20",
+       "stem": "I looked ______ and finally found my keys in the car.",
+       "choices": [
+        "everywhere",
+        "nowhere",
+        "anywhere"
+       ],
+       "correct": 0
+      }
+     ]
+    },
+    {
+     "block": "truefalse",
+     "title": "¿Está bien escrito?",
+     "instruction": "Decide si la oración es correcta en inglés.",
+     "items": [
+      {
+       "id": "l4b-tf1",
+       "type": "tf",
+       "points": 1,
+       "sentence": "She told me that she had finished the report.",
+       "correct": true
+      },
+      {
+       "id": "l4b-tf2",
+       "type": "tf",
+       "points": 1,
+       "sentence": "If I would have more money, I would travel.",
+       "correct": false
+      },
+      {
+       "id": "l4b-tf3",
+       "type": "tf",
+       "points": 1,
+       "sentence": "This is the worst movie I have ever seen.",
+       "correct": true
+      },
+      {
+       "id": "l4b-tf4",
+       "type": "tf",
+       "points": 1,
+       "sentence": "I wish I would be taller.",
+       "correct": false
+      }
+     ]
+    },
+    {
+     "block": "match",
+     "title": "Relaciona",
+     "instruction": "Une cada palabra con su definición.",
+     "items": [
+      {
+       "id": "l4b-match1",
+       "type": "match",
+       "points": 6,
+       "pairs": [
+        {
+         "left": "investor",
+         "right": "A person who puts money into a company hoping to earn more."
+        },
+        {
+         "left": "gate",
+         "right": "The place in an airport where you get on your plane."
+        },
+        {
+         "left": "referee",
+         "right": "The person who controls a match and applies the rules."
+        },
+        {
+         "left": "channel",
+         "right": "A television station that you select on your screen."
+        },
+        {
+         "left": "trainee",
+         "right": "A person who is learning to do a job inside a company."
+        },
+        {
+         "left": "editorial",
+         "right": "The article in which a newspaper gives its own opinion."
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "block": "gapfill",
+     "title": "Completa el texto",
+     "instruction": "Escribe la palabra que falta. Puedes usar el banco de palabras.",
+     "items": [
+      {
+       "id": "l4b-gap1",
+       "type": "gap",
+       "points": 5,
+       "tag": "Práctica",
+       "wordBank": [
+        "anywhere",
+        "had spent",
+        "have to",
+        "However",
+        "not to give up",
+        "told",
+        "whether",
+        "would"
+       ],
+       "segments": [
+        {
+         "kind": "text",
+         "value": "Two years ago my cousin Marisol wanted to open a small bakery. At the bank an adviser "
+        },
+        {
+         "kind": "blank",
+         "n": 1,
+         "answer": "told",
+         "accepted": [
+          "told"
+         ]
+        },
+        {
+         "kind": "text",
+         "value": " her that she "
+        },
+        {
+         "kind": "blank",
+         "n": 2,
+         "answer": "would",
+         "accepted": [
+          "would"
+         ]
+        },
+        {
+         "kind": "text",
+         "value": " need a business plan first, and he asked her "
+        },
+        {
+         "kind": "blank",
+         "n": 3,
+         "answer": "whether",
+         "accepted": [
+          "whether"
+         ]
+        },
+        {
+         "kind": "text",
+         "value": " she had any experience in the food industry. She didn't. By that Friday she "
+        },
+        {
+         "kind": "blank",
+         "n": 4,
+         "answer": "had spent",
+         "accepted": [
+          "had spent"
+         ]
+        },
+        {
+         "kind": "text",
+         "value": " four days reading about business plans, and she almost gave up; her mother told her "
+        },
+        {
+         "kind": "blank",
+         "n": 5,
+         "answer": "not to give up",
+         "accepted": [
+          "not to give up"
+         ]
+        },
+        {
+         "kind": "text",
+         "value": ". "
+        },
+        {
+         "kind": "filled",
+         "value": "However"
+        },
+        {
+         "kind": "text",
+         "value": ", the first months were hard. She couldn't find good flour "
+        },
+        {
+         "kind": "filled",
+         "value": "anywhere"
+        },
+        {
+         "kind": "text",
+         "value": " in the city at a reasonable price, and she drove to Delicias every Monday. Little by little her customers "
+        },
+        {
+         "kind": "filled",
+         "value": "were able to"
+        },
+        {
+         "kind": "text",
+         "value": " taste the difference. Today she "
+        },
+        {
+         "kind": "filled",
+         "value": "keeps"
+        },
+        {
+         "kind": "text",
+         "value": " telling me the same thing: if you sell something people love, you don't "
+        },
+        {
+         "kind": "filled",
+         "value": "have to"
+        },
+        {
+         "kind": "text",
+         "value": " spend much on advertising. She still remembers "
+        },
+        {
+         "kind": "filled",
+         "value": "that week"
+        },
+        {
+         "kind": "text",
+         "value": " when nothing worked. Next month she is "
+        },
+        {
+         "kind": "filled",
+         "value": "opening"
+        },
+        {
+         "kind": "text",
+         "value": " a second shop."
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "block": "reading",
+     "title": "Lectura",
+     "instruction": "Lee el texto y responde.",
+     "passage": {
+      "title": "The Voice in the Kitchen",
+      "paragraphs": [
+       "On November 2, 1920, a station in Pittsburgh broadcast the results of an American presidential election. Almost nobody heard it: there were perhaps a thousand receivers in the whole country. Ten years later, radio was in half the homes of the United States, and families had started to arrange their furniture around it.",
+       "Radio did something no newspaper had ever been able to do. It arrived at the same second in every house, and it did not ask the listener to know how to read. Governments understood this very quickly, and so did advertisers.",
+       "Television was supposed to kill it. It didn't. Radio moved into the car, and later into the kitchen and the workshop, because it is the only medium you can follow while your hands and your eyes are busy doing something else.",
+       "Today more people listen to spoken audio than at any moment in history, although most of them call it a podcast. Whatever we call it, the format has not changed much: one voice, talking to one person who is doing something else."
+      ]
+     },
+     "items": [
+      {
+       "id": "l4b-rd-mc1",
+       "type": "mcq",
+       "points": 1,
+       "stem": "How many receivers were there in the country in November 1920?",
+       "choices": [
+        "Perhaps a thousand.",
+        "Half the homes of the United States.",
+        "One in every car."
+       ],
+       "correct": 0
+      },
+      {
+       "id": "l4b-rd-mc2",
+       "type": "mcq",
+       "points": 1,
+       "stem": "Why did radio survive television?",
+       "choices": [
+        "Because governments protected it.",
+        "Because you can follow it while your hands and eyes are busy.",
+        "Because it stopped carrying advertising."
+       ],
+       "correct": 1
+      },
+      {
+       "id": "l4b-rd-op1",
+       "type": "open",
+       "points": 1,
+       "stem": "What had families started to do ten years after 1920?",
+       "accepted": [
+        "They had started to arrange their furniture around the radio."
+       ],
+       "model": "They had started to arrange their furniture around the radio."
+      }
+     ]
+    },
+    {
+     "block": "speaking",
+     "title": "Habla",
+     "instruction": "Graba tu respuesta. Unos segundos bastan.",
+     "items": [
+      {
+       "id": "l4b-sp1",
+       "type": "speaking",
+       "points": 1,
+       "target": "past perfect",
+       "stem": "What had you already learned about English before this course?",
+       "accepted": [],
+       "model": null,
+       "maxSeconds": 20
+      },
+      {
+       "id": "l4b-sp2",
+       "type": "speaking",
+       "points": 1,
+       "target": "be able to",
+       "stem": "What is something you have never been able to do?",
+       "accepted": [],
+       "model": null,
+       "maxSeconds": 20
+      }
+     ]
+    }
+   ]
+  }
+ }
+}

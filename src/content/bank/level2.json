@@ -1,0 +1,724 @@
+{
+ "level": 2,
+ "course": "Inglés II",
+ "cefr": "A2–B1",
+ "lessons": 20,
+ "forms": {
+  "A": {
+   "level": 2,
+   "form": "A",
+   "blocks": [
+    {
+     "block": "grammar",
+     "title": "Gramática",
+     "instruction": "Elige la opción correcta.",
+     "items": [
+      {
+       "id": "l2a-gr1",
+       "type": "mcq",
+       "points": 1,
+       "tag": "U1 L1 - Imperative / directions",
+       "stem": "______ left at the traffic light and walk two blocks.",
+       "choices": [
+        "You turn",
+        "Turn",
+        "Turning"
+       ],
+       "correct": 1
+      },
+      {
+       "id": "l2a-gr2",
+       "type": "mcq",
+       "points": 1,
+       "tag": "U1 L5 - Present continuous, wh- questions",
+       "stem": "What ______ Daniel wearing today?",
+       "choices": [
+        "is",
+        "does",
+        "are"
+       ],
+       "correct": 0
+      },
+      {
+       "id": "l2a-gr3",
+       "type": "mcq",
+       "points": 1,
+       "tag": "U2 L4 - There is / there are + any",
+       "stem": "There ______ any eggs in the box. We need to buy more.",
+       "choices": [
+        "isn't",
+        "aren't",
+        "not are"
+       ],
+       "correct": 1
+      },
+      {
+       "id": "l2a-gr4",
+       "type": "mcq",
+       "points": 1,
+       "tag": "U3 L2 - Object pronouns",
+       "stem": "Ana is my best friend. I see ______ every day.",
+       "choices": [
+        "she",
+        "her",
+        "hers"
+       ],
+       "correct": 1
+      },
+      {
+       "id": "l2a-gr5",
+       "type": "mcq",
+       "points": 1,
+       "tag": "U4 L1 - Simple past, irregular verbs",
+       "stem": "Last Saturday I ______ to the stadium with my cousins.",
+       "choices": [
+        "goed",
+        "went",
+        "go"
+       ],
+       "correct": 1
+      },
+      {
+       "id": "l2a-gr6",
+       "type": "mcq",
+       "points": 1,
+       "tag": "U4 L5 - Ago",
+       "stem": "I visited my grandparents two weeks ______.",
+       "choices": [
+        "last",
+        "ago",
+        "before"
+       ],
+       "correct": 1
+      }
+     ]
+    },
+    {
+     "block": "truefalse",
+     "title": "¿Está bien escrito?",
+     "instruction": "Decide si la oración es correcta en inglés.",
+     "items": [
+      {
+       "id": "l2a-tf1",
+       "type": "tf",
+       "points": 1,
+       "sentence": "She doesn't likes horror movies.",
+       "correct": false
+      },
+      {
+       "id": "l2a-tf2",
+       "type": "tf",
+       "points": 1,
+       "sentence": "There are a few apples on the table.",
+       "correct": true
+      },
+      {
+       "id": "l2a-tf3",
+       "type": "tf",
+       "points": 1,
+       "sentence": "Turn right and then walk two blocks.",
+       "correct": true
+      },
+      {
+       "id": "l2a-tf4",
+       "type": "tf",
+       "points": 1,
+       "sentence": "My sister always is late for class.",
+       "correct": false
+      }
+     ]
+    },
+    {
+     "block": "match",
+     "title": "Relaciona",
+     "instruction": "Une cada palabra con su definición.",
+     "items": [
+      {
+       "id": "l2a-match1",
+       "type": "match",
+       "points": 6,
+       "pairs": [
+        {
+         "left": "pharmacy",
+         "right": "A place where you buy medicine."
+        },
+        {
+         "left": "bakery",
+         "right": "A place where you buy bread and cakes."
+        },
+        {
+         "left": "headphones",
+         "right": "You wear these to listen to music without disturbing other people."
+        },
+        {
+         "left": "sweater",
+         "right": "Warm clothing for the top of your body in cold weather."
+        },
+        {
+         "left": "can",
+         "right": "A container for tuna, beans or soup."
+        },
+        {
+         "left": "cash register",
+         "right": "The place in a store where you pay for your food."
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "block": "gapfill",
+     "title": "Completa el texto",
+     "instruction": "Escribe la palabra que falta. Puedes usar el banco de palabras.",
+     "items": [
+      {
+       "id": "l2a-gap1",
+       "type": "gap",
+       "points": 5,
+       "tag": "Text A — Sofía's routine and plans",
+       "wordBank": [
+        "ago",
+        "always",
+        "are going to",
+        "can",
+        "Did",
+        "didn't",
+        "doesn't",
+        "is studying"
+       ],
+       "segments": [
+        {
+         "kind": "text",
+         "value": "Hi! My name is Sofía and I am a student at the Facultad de Ciencias de la Cultura Física. My first class is at seven o'clock, so I am "
+        },
+        {
+         "kind": "blank",
+         "n": 1,
+         "answer": "always",
+         "accepted": [
+          "always"
+         ]
+        },
+        {
+         "kind": "text",
+         "value": " tired in the morning. Right now my friend Daniel "
+        },
+        {
+         "kind": "blank",
+         "n": 2,
+         "answer": "is studying",
+         "accepted": [
+          "is studying"
+         ]
+        },
+        {
+         "kind": "text",
+         "value": " for the English exam in the library. I "
+        },
+        {
+         "kind": "blank",
+         "n": 3,
+         "answer": "can",
+         "accepted": [
+          "can"
+         ]
+        },
+        {
+         "kind": "text",
+         "value": " swim very well, so I train with the university team three times a week. Daniel "
+        },
+        {
+         "kind": "blank",
+         "n": 4,
+         "answer": "doesn't",
+         "accepted": [
+          "does not",
+          "doesn't"
+         ]
+        },
+        {
+         "kind": "text",
+         "value": " like sports, but he comes to all the games with me. Next Saturday we "
+        },
+        {
+         "kind": "blank",
+         "n": 5,
+         "answer": "are going to",
+         "accepted": [
+          "are going to"
+         ]
+        },
+        {
+         "kind": "text",
+         "value": " travel to Ciudad Juárez for a competition. I think our team "
+        },
+        {
+         "kind": "filled",
+         "value": "will"
+        },
+        {
+         "kind": "text",
+         "value": " win! "
+        },
+        {
+         "kind": "filled",
+         "value": "How often"
+        },
+        {
+         "kind": "text",
+         "value": " do you practice your favorite sport?"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "block": "reading",
+     "title": "Lectura",
+     "instruction": "Lee el texto y responde.",
+     "passage": {
+      "title": "Screens, Sleep and Study",
+      "paragraphs": [
+       "Most university students carry a small computer in their pocket every day. They use their phones to send messages, to listen to music, and to look for information for their classes. Technology helps them, but it also creates new problems.",
+       "Doctors say that many students sleep badly because they check their phones in bed. The light from the screen tells the brain that it is still daytime, so the student is not sleeping when the body needs to rest. In the morning, that student always feels tired, and he or she often forgets what the teacher explained the day before.",
+       "Some universities are trying a simple solution. Students leave their phones in a box at the door of the classroom, and they only use them during the break. The teachers say the classroom is quieter now and the students are participating more.",
+       "Of course, nobody is going to stop using technology, and nobody should. Phones are not the enemy. The important question is not \"How much technology do you use?\" The important question is \"When do you use it?\" Experts believe that small changes will make a big difference: no screens thirty minutes before bed, and no phones during class. Are you going to try it?"
+      ]
+     },
+     "items": [
+      {
+       "id": "l2a-rd-mc1",
+       "type": "mcq",
+       "points": 1,
+       "stem": "Why do many students sleep badly, according to the text?",
+       "choices": [
+        "They study too much at night.",
+        "They check their phones in bed.",
+        "They drink coffee in the evening."
+       ],
+       "correct": 1
+      },
+      {
+       "id": "l2a-rd-mc2",
+       "type": "mcq",
+       "points": 1,
+       "stem": "What is the result in the classrooms of some universities?",
+       "choices": [
+        "The students participate less than before.",
+        "The classroom is quieter and the students participate more.",
+        "Nothing has changed."
+       ],
+       "correct": 1
+      },
+      {
+       "id": "l2a-rd-op1",
+       "type": "open",
+       "points": 1,
+       "stem": "Where do the students leave their phones in those universities?",
+       "accepted": [
+        "In a box at the door of the classroom."
+       ],
+       "model": "In a box at the door of the classroom."
+      }
+     ]
+    },
+    {
+     "block": "speaking",
+     "title": "Habla",
+     "instruction": "Graba tu respuesta. Unos segundos bastan.",
+     "items": [
+      {
+       "id": "l2a-sp1",
+       "type": "speaking",
+       "points": 1,
+       "target": "adverbs of frequency",
+       "stem": "How often do you use your cell phone during the day?",
+       "accepted": [],
+       "model": "I always use my cell phone in the afternoon.",
+       "maxSeconds": 20
+      },
+      {
+       "id": "l2a-sp2",
+       "type": "speaking",
+       "points": 1,
+       "target": "used to",
+       "stem": "What did you use to do when you were a child?",
+       "accepted": [],
+       "model": "I used to ride my bike in the park.",
+       "maxSeconds": 20
+      }
+     ]
+    }
+   ]
+  },
+  "B": {
+   "level": 2,
+   "form": "B",
+   "blocks": [
+    {
+     "block": "grammar",
+     "title": "Gramática",
+     "instruction": "Elige la opción correcta.",
+     "items": [
+      {
+       "id": "l2b-gr1",
+       "type": "mcq",
+       "points": 1,
+       "tag": "lesson 1",
+       "stem": "______ the door, please. It's very cold outside.",
+       "choices": [
+        "You close",
+        "Close",
+        "Closing"
+       ],
+       "correct": 1
+      },
+      {
+       "id": "l2b-gr2",
+       "type": "mcq",
+       "points": 1,
+       "tag": "lesson 5",
+       "stem": "Where ______ your cousins going on vacation?",
+       "choices": [
+        "do",
+        "are",
+        "is"
+       ],
+       "correct": 1
+      },
+      {
+       "id": "l2b-gr3",
+       "type": "mcq",
+       "points": 1,
+       "tag": "lesson 9",
+       "stem": "There ______ any milk in the refrigerator.",
+       "choices": [
+        "isn't",
+        "aren't",
+        "not is"
+       ],
+       "correct": 0
+      },
+      {
+       "id": "l2b-gr4",
+       "type": "mcq",
+       "points": 1,
+       "tag": "lesson 12",
+       "stem": "Those are my keys. Can you give ______ to me?",
+       "choices": [
+        "they",
+        "them",
+        "their"
+       ],
+       "correct": 1
+      },
+      {
+       "id": "l2b-gr5",
+       "type": "mcq",
+       "points": 1,
+       "tag": "lesson 16",
+       "stem": "We ______ a wonderful time at the beach last July.",
+       "choices": [
+        "haved",
+        "had",
+        "has"
+       ],
+       "correct": 1
+      },
+      {
+       "id": "l2b-gr6",
+       "type": "mcq",
+       "points": 1,
+       "tag": "lesson 20",
+       "stem": "______ did the concert last? - About three hours.",
+       "choices": [
+        "How much",
+        "How long",
+        "How often"
+       ],
+       "correct": 1
+      }
+     ]
+    },
+    {
+     "block": "truefalse",
+     "title": "¿Está bien escrito?",
+     "instruction": "Decide si la oración es correcta en inglés.",
+     "items": [
+      {
+       "id": "l2b-tf1",
+       "type": "tf",
+       "points": 1,
+       "sentence": "My father don't like horror movies.",
+       "correct": false
+      },
+      {
+       "id": "l2b-tf2",
+       "type": "tf",
+       "points": 1,
+       "sentence": "There is a little sugar in my coffee.",
+       "correct": true
+      },
+      {
+       "id": "l2b-tf3",
+       "type": "tf",
+       "points": 1,
+       "sentence": "He speaks English very well.",
+       "correct": true
+      },
+      {
+       "id": "l2b-tf4",
+       "type": "tf",
+       "points": 1,
+       "sentence": "I saw that movie ago two weeks.",
+       "correct": false
+      }
+     ]
+    },
+    {
+     "block": "match",
+     "title": "Relaciona",
+     "instruction": "Une cada palabra con su definición.",
+     "items": [
+      {
+       "id": "l2b-match1",
+       "type": "match",
+       "points": 6,
+       "pairs": [
+        {
+         "left": "keyboard",
+         "right": "The part of a computer you use to type words."
+        },
+        {
+         "left": "aisle",
+         "right": "The long, narrow space between the shelves in a supermarket."
+        },
+        {
+         "left": "rush hour",
+         "right": "The time of day when there is a lot of traffic."
+        },
+        {
+         "left": "fossil",
+         "right": "The remains of an animal that lived a very long time ago."
+        },
+        {
+         "left": "receipt",
+         "right": "The small paper the cashier gives you after you pay."
+        },
+        {
+         "left": "subtitles",
+         "right": "The written words at the bottom of a foreign film."
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "block": "gapfill",
+     "title": "Completa el texto",
+     "instruction": "Escribe la palabra que falta. Puedes usar el banco de palabras.",
+     "items": [
+      {
+       "id": "l2b-gap1",
+       "type": "gap",
+       "points": 5,
+       "tag": "Práctica",
+       "wordBank": [
+        "a little",
+        "am going to",
+        "can",
+        "How often",
+        "many",
+        "never",
+        "was",
+        "went"
+       ],
+       "segments": [
+        {
+         "kind": "text",
+         "value": "My name is Andrea. I am "
+        },
+        {
+         "kind": "blank",
+         "n": 1,
+         "answer": "never",
+         "accepted": [
+          "never"
+         ]
+        },
+        {
+         "kind": "text",
+         "value": " bored on the weekend, because I always have a plan. I "
+        },
+        {
+         "kind": "blank",
+         "n": 2,
+         "answer": "can",
+         "accepted": [
+          "can"
+         ]
+        },
+        {
+         "kind": "text",
+         "value": " play the guitar, so on Saturdays I practice with my band. Last Saturday we "
+        },
+        {
+         "kind": "blank",
+         "n": 3,
+         "answer": "went",
+         "accepted": [
+          "went"
+         ]
+        },
+        {
+         "kind": "text",
+         "value": " to a small festival in the park. It "
+        },
+        {
+         "kind": "blank",
+         "n": 4,
+         "answer": "was",
+         "accepted": [
+          "was"
+         ]
+        },
+        {
+         "kind": "text",
+         "value": " a great experience, and there were so "
+        },
+        {
+         "kind": "blank",
+         "n": 5,
+         "answer": "many",
+         "accepted": [
+          "many"
+         ]
+        },
+        {
+         "kind": "text",
+         "value": " people! When I was a child I "
+        },
+        {
+         "kind": "filled",
+         "value": "used to"
+        },
+        {
+         "kind": "text",
+         "value": " sing in the school choir, but I was very shy. Now I only need "
+        },
+        {
+         "kind": "filled",
+         "value": "a little"
+        },
+        {
+         "kind": "text",
+         "value": " courage before I go on stage. Next month I "
+        },
+        {
+         "kind": "filled",
+         "value": "am going to"
+        },
+        {
+         "kind": "text",
+         "value": " record my first song, and I think my family "
+        },
+        {
+         "kind": "filled",
+         "value": "will"
+        },
+        {
+         "kind": "text",
+         "value": " love it. "
+        },
+        {
+         "kind": "filled",
+         "value": "How often"
+        },
+        {
+         "kind": "text",
+         "value": " do you listen to live music?"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "block": "reading",
+     "title": "Lectura",
+     "instruction": "Lee el texto y responde.",
+     "passage": {
+      "title": "The Bicycle That Changed a City",
+      "paragraphs": [
+       "Twenty years ago, the streets of Bogotá, Colombia, were full of cars. Every morning, thousands of people spent two hours in traffic to arrive at work. The air was dirty and the drivers were angry.",
+       "Then the city built something simple: a network of bicycle paths. Today those paths are more than five hundred kilometers long, and every Sunday the city closes its main avenues to cars. Families walk, run and ride their bicycles in the middle of the street.",
+       "The idea was not expensive, but it changed the way people move. Many workers now arrive at the office in thirty minutes instead of two hours. Other cities in Latin America are copying the plan, and experts believe more capitals will close their streets to cars on Sundays in the next few years."
+      ]
+     },
+     "items": [
+      {
+       "id": "l2b-rd-mc1",
+       "type": "mcq",
+       "points": 1,
+       "stem": "How long did people use to spend in traffic every morning?",
+       "choices": [
+        "Thirty minutes.",
+        "Two hours.",
+        "Twenty years."
+       ],
+       "correct": 1
+      },
+      {
+       "id": "l2b-rd-mc2",
+       "type": "mcq",
+       "points": 1,
+       "stem": "What happens on Sundays?",
+       "choices": [
+        "The city closes its main avenues to cars.",
+        "The bicycle paths close.",
+        "People work from home."
+       ],
+       "correct": 0
+      },
+      {
+       "id": "l2b-rd-op1",
+       "type": "open",
+       "points": 1,
+       "stem": "How long are the bicycle paths today?",
+       "accepted": [
+        "They are more than five hundred kilometers long."
+       ],
+       "model": "They are more than five hundred kilometers long."
+      }
+     ]
+    },
+    {
+     "block": "speaking",
+     "title": "Habla",
+     "instruction": "Graba tu respuesta. Unos segundos bastan.",
+     "items": [
+      {
+       "id": "l2b-sp1",
+       "type": "speaking",
+       "points": 1,
+       "target": "adverbs of frequency",
+       "stem": "How often do you study English at home?",
+       "accepted": [],
+       "model": null,
+       "maxSeconds": 20
+      },
+      {
+       "id": "l2b-sp2",
+       "type": "speaking",
+       "points": 1,
+       "target": "used to",
+       "stem": "What did you use to be afraid of when you were a child?",
+       "accepted": [],
+       "model": null,
+       "maxSeconds": 20
+      }
+     ]
+    }
+   ]
+  }
+ }
+}

@@ -1,0 +1,735 @@
+{
+ "level": 3,
+ "course": "Inglés III",
+ "cefr": "B1",
+ "lessons": 22,
+ "forms": {
+  "A": {
+   "level": 3,
+   "form": "A",
+   "blocks": [
+    {
+     "block": "grammar",
+     "title": "Gramática",
+     "instruction": "Elige la opción correcta.",
+     "items": [
+      {
+       "id": "l3a-gr1",
+       "type": "mcq",
+       "points": 1,
+       "tag": "U1 L1 - Past continuous",
+       "stem": "At eight o'clock last night I ______ my homework.",
+       "choices": [
+        "was doing",
+        "did",
+        "were doing"
+       ],
+       "correct": 0
+      },
+      {
+       "id": "l3a-gr2",
+       "type": "mcq",
+       "points": 1,
+       "tag": "U1 L5 - Past continuous, interrogatives",
+       "stem": "______ people wearing coats at the party?  -  No, they weren't.",
+       "choices": [
+        "Did",
+        "Were",
+        "Was"
+       ],
+       "correct": 1
+      },
+      {
+       "id": "l3a-gr3",
+       "type": "mcq",
+       "points": 1,
+       "tag": "U2 L4 - Present perfect vs. simple past",
+       "stem": "I ______ my degree two years ago.",
+       "choices": [
+        "have finished",
+        "finished",
+        "has finished"
+       ],
+       "correct": 1
+      },
+      {
+       "id": "l3a-gr4",
+       "type": "mcq",
+       "points": 1,
+       "tag": "U3 L4 - First conditional with modal verbs",
+       "stem": "If you help me with the dishes, we ______ finish sooner.",
+       "choices": [
+        "may",
+        "may to",
+        "maybe"
+       ],
+       "correct": 0
+      },
+      {
+       "id": "l3a-gr5",
+       "type": "mcq",
+       "points": 1,
+       "tag": "U4 L3 - May / might / need to",
+       "stem": "I'm not sure where Daniel is. He ______ be at the library.",
+       "choices": [
+        "might",
+        "must",
+        "has to"
+       ],
+       "correct": 0
+      },
+      {
+       "id": "l3a-gr6",
+       "type": "mcq",
+       "points": 1,
+       "tag": "U4 L7 - Might have / could have / may have",
+       "stem": "I can't find my keys. I ______ them at the office.",
+       "choices": [
+        "might have left",
+        "might left",
+        "might have leave"
+       ],
+       "correct": 0
+      }
+     ]
+    },
+    {
+     "block": "truefalse",
+     "title": "¿Está bien escrito?",
+     "instruction": "Decide si la oración es correcta en inglés.",
+     "items": [
+      {
+       "id": "l3a-tf1",
+       "type": "tf",
+       "points": 1,
+       "sentence": "I have seen that movie last week.",
+       "correct": false
+      },
+      {
+       "id": "l3a-tf2",
+       "type": "tf",
+       "points": 1,
+       "sentence": "While she was cooking dinner, the phone rang.",
+       "correct": true
+      },
+      {
+       "id": "l3a-tf3",
+       "type": "tf",
+       "points": 1,
+       "sentence": "I haven't finished my homework yet.",
+       "correct": true
+      },
+      {
+       "id": "l3a-tf4",
+       "type": "tf",
+       "points": 1,
+       "sentence": "She should have call me yesterday.",
+       "correct": false
+      }
+     ]
+    },
+    {
+     "block": "match",
+     "title": "Relaciona",
+     "instruction": "Une cada palabra con su definición.",
+     "items": [
+      {
+       "id": "l3a-match1",
+       "type": "match",
+       "points": 6,
+       "pairs": [
+        {
+         "left": "helmet",
+         "right": "You wear this on your head to protect it on a construction site."
+        },
+        {
+         "left": "scaffolding",
+         "right": "The temporary metal structure workers stand on to build a wall."
+        },
+        {
+         "left": "endangered",
+         "right": "A word for a species that is in danger of disappearing."
+        },
+        {
+         "left": "referee",
+         "right": "The person who controls a game and makes sure the rules are followed."
+        },
+        {
+         "left": "shoplifting",
+         "right": "Taking goods from a store without paying for them."
+        },
+        {
+         "left": "volunteer",
+         "right": "A person who works without payment because they want to help."
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "block": "gapfill",
+     "title": "Completa el texto",
+     "instruction": "Escribe la palabra que falta. Puedes usar el banco de palabras.",
+     "items": [
+      {
+       "id": "l3a-gap1",
+       "type": "gap",
+       "points": 5,
+       "tag": "Text A — A safe site is a slow site",
+       "wordBank": [
+        "As long as",
+        "has worked",
+        "have never",
+        "may",
+        "mustn't",
+        "rang",
+        "were working",
+        "While"
+       ],
+       "segments": [
+        {
+         "kind": "text",
+         "value": "My name is Andrés and I am a civil engineer. I "
+        },
+        {
+         "kind": "blank",
+         "n": 1,
+         "answer": "have never",
+         "accepted": [
+          "have never"
+         ]
+        },
+        {
+         "kind": "text",
+         "value": " had an accident at work, and that is not luck: it is training. Last Tuesday my team and I "
+        },
+        {
+         "kind": "blank",
+         "n": 2,
+         "answer": "were working",
+         "accepted": [
+          "were working"
+         ]
+        },
+        {
+         "kind": "text",
+         "value": " on the roof of a new building when the alarm "
+        },
+        {
+         "kind": "blank",
+         "n": 3,
+         "answer": "rang",
+         "accepted": [
+          "rang"
+         ]
+        },
+        {
+         "kind": "text",
+         "value": ". It was raining hard, so we came down immediately. "
+        },
+        {
+         "kind": "blank",
+         "n": 4,
+         "answer": "While",
+         "accepted": [
+          "While"
+         ]
+        },
+        {
+         "kind": "text",
+         "value": " we were waiting inside, the supervisor checked all the scaffolding. He "
+        },
+        {
+         "kind": "blank",
+         "n": 5,
+         "answer": "has worked",
+         "accepted": [
+          "has worked"
+         ]
+        },
+        {
+         "kind": "text",
+         "value": " in construction "
+        },
+        {
+         "kind": "filled",
+         "value": "for"
+        },
+        {
+         "kind": "text",
+         "value": " twenty-five years, and he "
+        },
+        {
+         "kind": "filled",
+         "value": "has just"
+        },
+        {
+         "kind": "text",
+         "value": " finished a new safety course. He says the same thing every morning: a safe site is a slow site."
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "block": "reading",
+     "title": "Lectura",
+     "instruction": "Lee el texto y responde.",
+     "passage": {
+      "title": "The Roofs That Cool a City",
+      "paragraphs": [
+       "If you fly over Berlin, Stuttgart or Basel today, you will see something unusual: hundreds of roofs covered with grass, flowers and small plants. Engineers call them green roofs, and cities have been building them for more than forty years.",
+       "The idea is simple. When it rains in a normal city, the water runs off the concrete immediately and the drains cannot take it, so the streets flood. A green roof works like a sponge: the plants and the soil hold the water and release it slowly. Studies have shown that a green roof can keep more than half of the rain that falls on it.",
+       "Green roofs also cool the air. If a building has a green roof, the temperature inside is two or three degrees lower in summer, so the owners spend less money on air conditioning. Birds and insects come back, and the street is quieter.",
+       "They are not perfect. A green roof is heavier than a normal roof, so an old building may need new structural support, and somebody has to look after the plants. But engineers agree on one thing: unless our cities change the way they treat rain, the floods will get worse."
+      ]
+     },
+     "items": [
+      {
+       "id": "l3a-rd-mc1",
+       "type": "mcq",
+       "points": 1,
+       "stem": "According to the text, what happens to rainwater in a normal city?",
+       "choices": [
+        "The plants and the soil hold it.",
+        "It runs off the concrete and the streets flood.",
+        "The drains release it slowly."
+       ],
+       "correct": 1
+      },
+      {
+       "id": "l3a-rd-mc2",
+       "type": "mcq",
+       "points": 1,
+       "stem": "Why do the owners of a building with a green roof spend less money?",
+       "choices": [
+        "Because the roof is heavier.",
+        "Because they use less air conditioning.",
+        "Because birds and insects come back."
+       ],
+       "correct": 1
+      },
+      {
+       "id": "l3a-rd-op1",
+       "type": "open",
+       "points": 1,
+       "stem": "What does the text compare a green roof to, and why?",
+       "accepted": [
+        "To a sponge, because the plants and the soil hold the water and release it slowly."
+       ],
+       "model": "To a sponge, because the plants and the soil hold the water and release it slowly."
+      }
+     ]
+    },
+    {
+     "block": "speaking",
+     "title": "Habla",
+     "instruction": "Graba tu respuesta. Unos segundos bastan.",
+     "items": [
+      {
+       "id": "l3a-sp1",
+       "type": "speaking",
+       "points": 1,
+       "target": "past continuous",
+       "stem": "What were you doing at nine o'clock last night?",
+       "accepted": [],
+       "model": "I was studying for my English exam at nine o'clock last night.",
+       "maxSeconds": 20
+      },
+      {
+       "id": "l3a-sp2",
+       "type": "speaking",
+       "points": 1,
+       "target": "would rather",
+       "stem": "Would you rather work in an office or outdoors? Why?",
+       "accepted": [],
+       "model": "I would rather work outdoors because I don't like to sit all day.",
+       "maxSeconds": 20
+      }
+     ]
+    }
+   ]
+  },
+  "B": {
+   "level": 3,
+   "form": "B",
+   "blocks": [
+    {
+     "block": "grammar",
+     "title": "Gramática",
+     "instruction": "Elige la opción correcta.",
+     "items": [
+      {
+       "id": "l3b-gr1",
+       "type": "mcq",
+       "points": 1,
+       "tag": "lesson 1",
+       "stem": "When the earthquake started, we ______ dinner.",
+       "choices": [
+        "were having",
+        "had",
+        "was having"
+       ],
+       "correct": 0
+      },
+      {
+       "id": "l3b-gr2",
+       "type": "mcq",
+       "points": 1,
+       "tag": "lesson 5",
+       "stem": "______ it raining when you left the building?",
+       "choices": [
+        "Did",
+        "Was",
+        "Were"
+       ],
+       "correct": 1
+      },
+      {
+       "id": "l3b-gr3",
+       "type": "mcq",
+       "points": 1,
+       "tag": "lesson 9",
+       "stem": "My grandmother ______ that house in 1978.",
+       "choices": [
+        "has bought",
+        "bought",
+        "have bought"
+       ],
+       "correct": 1
+      },
+      {
+       "id": "l3b-gr4",
+       "type": "mcq",
+       "points": 1,
+       "tag": "lesson 14",
+       "stem": "If we leave now, we ______ arrive before the museum closes.",
+       "choices": [
+        "might",
+        "might to",
+        "will might"
+       ],
+       "correct": 0
+      },
+      {
+       "id": "l3b-gr5",
+       "type": "mcq",
+       "points": 1,
+       "tag": "lesson 18",
+       "stem": "She isn't answering. She ______ be in a meeting.",
+       "choices": [
+        "may",
+        "may to",
+        "maybe"
+       ],
+       "correct": 0
+      },
+      {
+       "id": "l3b-gr6",
+       "type": "mcq",
+       "points": 1,
+       "tag": "lesson 22",
+       "stem": "Nobody answered the door. They ______ out.",
+       "choices": [
+        "could have gone",
+        "could gone",
+        "could have go"
+       ],
+       "correct": 0
+      }
+     ]
+    },
+    {
+     "block": "truefalse",
+     "title": "¿Está bien escrito?",
+     "instruction": "Decide si la oración es correcta en inglés.",
+     "items": [
+      {
+       "id": "l3b-tf1",
+       "type": "tf",
+       "points": 1,
+       "sentence": "I have visited my cousins last summer.",
+       "correct": false
+      },
+      {
+       "id": "l3b-tf2",
+       "type": "tf",
+       "points": 1,
+       "sentence": "While he was driving home, the storm started.",
+       "correct": true
+      },
+      {
+       "id": "l3b-tf3",
+       "type": "tf",
+       "points": 1,
+       "sentence": "She hasn't sent the application yet.",
+       "correct": true
+      },
+      {
+       "id": "l3b-tf4",
+       "type": "tf",
+       "points": 1,
+       "sentence": "We should have book the hotel earlier.",
+       "correct": false
+      }
+     ]
+    },
+    {
+     "block": "match",
+     "title": "Relaciona",
+     "instruction": "Une cada palabra con su definición.",
+     "items": [
+      {
+       "id": "l3b-match1",
+       "type": "match",
+       "points": 6,
+       "pairs": [
+        {
+         "left": "commute",
+         "right": "The journey you make every day between your home and your work."
+        },
+        {
+         "left": "recycling",
+         "right": "Using materials like paper or glass again instead of throwing them away."
+        },
+        {
+         "left": "fine",
+         "right": "The money you pay when you break a rule, for example a road rule."
+        },
+        {
+         "left": "teammate",
+         "right": "Another person who plays on the same side as you."
+        },
+        {
+         "left": "landmark",
+         "right": "A famous building or place that visitors come to see."
+        },
+        {
+         "left": "overtime",
+         "right": "The extra hours you work after your normal working day."
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "block": "gapfill",
+     "title": "Completa el texto",
+     "instruction": "Escribe la palabra que falta. Puedes usar el banco de palabras.",
+     "items": [
+      {
+       "id": "l3b-gap1",
+       "type": "gap",
+       "points": 5,
+       "tag": "Práctica",
+       "wordBank": [
+        "already",
+        "as long as",
+        "for",
+        "had to",
+        "Have you ever",
+        "may",
+        "was driving",
+        "were"
+       ],
+       "segments": [
+        {
+         "kind": "blank",
+         "n": 1,
+         "answer": "Have you ever",
+         "accepted": [
+          "Have you ever"
+         ]
+        },
+        {
+         "kind": "text",
+         "value": " been late for something really important? Last Monday I "
+        },
+        {
+         "kind": "blank",
+         "n": 2,
+         "answer": "was driving",
+         "accepted": [
+          "was driving"
+         ]
+        },
+        {
+         "kind": "text",
+         "value": " to a job interview when my car stopped in the middle of the avenue. Two people "
+        },
+        {
+         "kind": "blank",
+         "n": 3,
+         "answer": "were",
+         "accepted": [
+          "were"
+         ]
+        },
+        {
+         "kind": "text",
+         "value": " waiting at the bus stop, and one of them helped me push it to the sidewalk. I "
+        },
+        {
+         "kind": "blank",
+         "n": 4,
+         "answer": "had to",
+         "accepted": [
+          "had to"
+         ]
+        },
+        {
+         "kind": "text",
+         "value": " walk the last ten blocks, and I arrived twenty minutes late. The interviewer had "
+        },
+        {
+         "kind": "blank",
+         "n": 5,
+         "answer": "already",
+         "accepted": [
+          "already"
+         ]
+        },
+        {
+         "kind": "text",
+         "value": " started with another candidate. I "
+        },
+        {
+         "kind": "filled",
+         "value": "should have"
+        },
+        {
+         "kind": "text",
+         "value": " left home earlier - I know that now. My car "
+        },
+        {
+         "kind": "filled",
+         "value": "might have"
+        },
+        {
+         "kind": "text",
+         "value": " needed a new battery, but I am not a mechanic. I have had that car "
+        },
+        {
+         "kind": "filled",
+         "value": "for"
+        },
+        {
+         "kind": "text",
+         "value": " nine years. Next time I "
+        },
+        {
+         "kind": "filled",
+         "value": "will call"
+        },
+        {
+         "kind": "text",
+         "value": " a taxi. "
+        },
+        {
+         "kind": "filled",
+         "value": "Unless"
+        },
+        {
+         "kind": "text",
+         "value": " you plan for problems, they always happen at the worst moment. And "
+        },
+        {
+         "kind": "filled",
+         "value": "as long as"
+        },
+        {
+         "kind": "text",
+         "value": " you arrive with a good attitude, a company "
+        },
+        {
+         "kind": "filled",
+         "value": "may"
+        },
+        {
+         "kind": "text",
+         "value": " still give you a second chance."
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "block": "reading",
+     "title": "Lectura",
+     "instruction": "Lee el texto y responde.",
+     "passage": {
+      "title": "A Team Without a Country",
+      "paragraphs": [
+       "At the opening ceremony of the 2016 Olympic Games in Rio de Janeiro, one team walked into the stadium without a national flag. The ten athletes of the Refugee Olympic Team came from South Sudan, Syria, Ethiopia and the Democratic Republic of the Congo. None of them had a country to represent, because all of them had left their homes because of war.",
+       "The most famous member was Yusra Mardini, a swimmer from Damascus. In 2015 she was crossing the Aegean Sea in a small boat with nineteen other people when the engine stopped working. Mardini and her sister, both trained swimmers, got into the water and pushed the boat for more than three hours, until it reached the Greek island of Lesbos.",
+       "Nobody from the team has won a medal, and that was never the point. The Olympic Committee has sent a refugee team to every Games since 2016. As the president said in Rio, they have no flag and no anthem, but they have the same right to compete as everybody else."
+      ]
+     },
+     "items": [
+      {
+       "id": "l3b-rd-mc1",
+       "type": "mcq",
+       "points": 1,
+       "stem": "Why did the team walk into the stadium without a national flag?",
+       "choices": [
+        "Because their flag was lost on the journey.",
+        "Because none of them had a country to represent.",
+        "Because it was a new Olympic rule."
+       ],
+       "correct": 1
+      },
+      {
+       "id": "l3b-rd-mc2",
+       "type": "mcq",
+       "points": 1,
+       "stem": "How long did the two sisters push the boat?",
+       "choices": [
+        "For nineteen minutes.",
+        "For more than three hours.",
+        "Since 2015."
+       ],
+       "correct": 1
+      },
+      {
+       "id": "l3b-rd-op1",
+       "type": "open",
+       "points": 1,
+       "stem": "How many athletes were there on the Refugee Olympic Team in 2016?",
+       "accepted": [
+        "There were ten athletes."
+       ],
+       "model": "There were ten athletes."
+      }
+     ]
+    },
+    {
+     "block": "speaking",
+     "title": "Habla",
+     "instruction": "Graba tu respuesta. Unos segundos bastan.",
+     "items": [
+      {
+       "id": "l3b-sp1",
+       "type": "speaking",
+       "points": 1,
+       "target": "past continuous",
+       "stem": "What were you doing when this class started?",
+       "accepted": [],
+       "model": null,
+       "maxSeconds": 20
+      },
+      {
+       "id": "l3b-sp2",
+       "type": "speaking",
+       "points": 1,
+       "target": "would rather",
+       "stem": "Would you rather study in the morning or at night? Why?",
+       "accepted": [],
+       "model": null,
+       "maxSeconds": 20
+      }
+     ]
+    }
+   ]
+  }
+ }
+}

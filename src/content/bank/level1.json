@@ -1,0 +1,727 @@
+{
+ "level": 1,
+ "course": "Inglés I",
+ "cefr": "A1–A2",
+ "lessons": 20,
+ "forms": {
+  "A": {
+   "level": 1,
+   "form": "A",
+   "blocks": [
+    {
+     "block": "grammar",
+     "title": "Gramática",
+     "instruction": "Elige la opción correcta.",
+     "items": [
+      {
+       "id": "l1a-gr1",
+       "type": "mcq",
+       "points": 1,
+       "tag": "U1 L1 - Numbers, dates and months",
+       "stem": "December is the ______ month of the year.",
+       "choices": [
+        "twelve",
+        "twelfth",
+        "twelveth"
+       ],
+       "correct": 1
+      },
+      {
+       "id": "l1a-gr2",
+       "type": "mcq",
+       "points": 1,
+       "tag": "U1 L5 - Verb to be: negative and questions",
+       "stem": "______ you a student?  -  Yes, I am.",
+       "choices": [
+        "Do",
+        "Are",
+        "Is"
+       ],
+       "correct": 1
+      },
+      {
+       "id": "l1a-gr3",
+       "type": "mcq",
+       "points": 1,
+       "tag": "U2 L4 - Verb to be: Wh- questions",
+       "stem": "Where ______ your parents from?",
+       "choices": [
+        "is",
+        "are",
+        "do"
+       ],
+       "correct": 1
+      },
+      {
+       "id": "l1a-gr4",
+       "type": "mcq",
+       "points": 1,
+       "tag": "U3 L2 - Simple present, third person",
+       "stem": "My mother ______ in a hospital.",
+       "choices": [
+        "work",
+        "works",
+        "working"
+       ],
+       "correct": 1
+      },
+      {
+       "id": "l1a-gr5",
+       "type": "mcq",
+       "points": 1,
+       "tag": "U4 L1 - Verb have",
+       "stem": "My cousin ______ blue eyes and blond hair.",
+       "choices": [
+        "have",
+        "has",
+        "haves"
+       ],
+       "correct": 1
+      },
+      {
+       "id": "l1a-gr6",
+       "type": "mcq",
+       "points": 1,
+       "tag": "U4 L5 - Can / can't",
+       "stem": "My dog ______ swim, but it can't climb a tree.",
+       "choices": [
+        "can",
+        "cans",
+        "can to"
+       ],
+       "correct": 0
+      }
+     ]
+    },
+    {
+     "block": "truefalse",
+     "title": "¿Está bien escrito?",
+     "instruction": "Decide si la oración es correcta en inglés.",
+     "items": [
+      {
+       "id": "l1a-tf1",
+       "type": "tf",
+       "points": 1,
+       "sentence": "My brother have two dogs.",
+       "correct": false
+      },
+      {
+       "id": "l1a-tf2",
+       "type": "tf",
+       "points": 1,
+       "sentence": "There are four chairs in the kitchen.",
+       "correct": true
+      },
+      {
+       "id": "l1a-tf3",
+       "type": "tf",
+       "points": 1,
+       "sentence": "Ana is as tall as her mother.",
+       "correct": true
+      },
+      {
+       "id": "l1a-tf4",
+       "type": "tf",
+       "points": 1,
+       "sentence": "What she does on Sundays?",
+       "correct": false
+      }
+     ]
+    },
+    {
+     "block": "match",
+     "title": "Relaciona",
+     "instruction": "Une cada palabra con su definición.",
+     "items": [
+      {
+       "id": "l1a-match1",
+       "type": "match",
+       "points": 6,
+       "pairs": [
+        {
+         "left": "eraser",
+         "right": "You use this to remove a mistake from your notebook."
+        },
+        {
+         "left": "backpack",
+         "right": "You carry your books and notebooks in it."
+        },
+        {
+         "left": "shoulder",
+         "right": "The part of your body between your neck and your arm."
+        },
+        {
+         "left": "jacket",
+         "right": "You wear this over your shirt when it is cold."
+        },
+        {
+         "left": "aunt",
+         "right": "The sister of your mother or your father."
+        },
+        {
+         "left": "Japanese",
+         "right": "The nationality of a person from Japan."
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "block": "gapfill",
+     "title": "Completa el texto",
+     "instruction": "Escribe la palabra que falta. Puedes usar el banco de palabras.",
+     "items": [
+      {
+       "id": "l1a-gap1",
+       "type": "gap",
+       "points": 5,
+       "tag": "Text A — My family and my house",
+       "wordBank": [
+        "am",
+        "at",
+        "doesn't",
+        "get up",
+        "has",
+        "have",
+        "is",
+        "There is"
+       ],
+       "segments": [
+        {
+         "kind": "text",
+         "value": "Hello! My name is Lucía and I "
+        },
+        {
+         "kind": "blank",
+         "n": 1,
+         "answer": "am",
+         "accepted": [
+          "am"
+         ]
+        },
+        {
+         "kind": "text",
+         "value": " a student at the Facultad de Ciencias de la Cultura Física. My family "
+        },
+        {
+         "kind": "blank",
+         "n": 2,
+         "answer": "is",
+         "accepted": [
+          "is"
+         ]
+        },
+        {
+         "kind": "text",
+         "value": " small: my mother, my father and my brother Diego. Diego "
+        },
+        {
+         "kind": "blank",
+         "n": 3,
+         "answer": "has",
+         "accepted": [
+          "has"
+         ]
+        },
+        {
+         "kind": "text",
+         "value": " short black hair and green eyes. I "
+        },
+        {
+         "kind": "blank",
+         "n": 4,
+         "answer": "have",
+         "accepted": [
+          "have"
+         ]
+        },
+        {
+         "kind": "text",
+         "value": " long hair, like my mother. Our house is not very big. "
+        },
+        {
+         "kind": "blank",
+         "n": 5,
+         "answer": "There is",
+         "accepted": [
+          "There is",
+          "there's"
+         ]
+        },
+        {
+         "kind": "text",
+         "value": " one bathroom and "
+        },
+        {
+         "kind": "filled",
+         "value": "there are"
+        },
+        {
+         "kind": "text",
+         "value": " three bedrooms. Right now my mother "
+        },
+        {
+         "kind": "filled",
+         "value": "is cooking"
+        },
+        {
+         "kind": "text",
+         "value": " dinner in the kitchen, and my father is in the living room with the dog."
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "block": "reading",
+     "title": "Lectura",
+     "instruction": "Lee el texto y responde.",
+     "passage": {
+      "title": "A Day in the Life of a University Student",
+      "paragraphs": [
+       "Mariana is nineteen years old and she is a student at the university. She lives with her family in Chihuahua.",
+       "Her day starts early. She gets up at six o'clock and she has breakfast with her mother. Her first class is at seven, so she takes the bus at half past six. The bus is slow, but it is cheaper than a taxi.",
+       "Mariana has five classes every day. Her favorite subject is anatomy, because the teacher is very clear. Math is her most difficult class.",
+       "At two o'clock she has lunch in the cafeteria with her friends. In the afternoon she studies in the library. She doesn't watch television from Monday to Friday.",
+       "Mariana works on Saturdays in a small store. She isn't tired, because she is happy: she wants to be a physical therapist."
+      ]
+     },
+     "items": [
+      {
+       "id": "l1a-rd-mc1",
+       "type": "mcq",
+       "points": 1,
+       "stem": "What time does Mariana get up?",
+       "choices": [
+        "At six o'clock.",
+        "At seven o'clock.",
+        "At half past six."
+       ],
+       "correct": 0
+      },
+      {
+       "id": "l1a-rd-mc2",
+       "type": "mcq",
+       "points": 1,
+       "stem": "Which is her most difficult class?",
+       "choices": [
+        "Anatomy.",
+        "Math.",
+        "English."
+       ],
+       "correct": 1
+      },
+      {
+       "id": "l1a-rd-op1",
+       "type": "open",
+       "points": 1,
+       "stem": "Where does Mariana study in the afternoon?",
+       "accepted": [
+        "She studies in the library."
+       ],
+       "model": "She studies in the library."
+      }
+     ]
+    },
+    {
+     "block": "speaking",
+     "title": "Habla",
+     "instruction": "Graba tu respuesta. Unos segundos bastan.",
+     "items": [
+      {
+       "id": "l1a-sp1",
+       "type": "speaking",
+       "points": 1,
+       "target": "verb to be",
+       "stem": "Where are you from?",
+       "accepted": [],
+       "model": "I am from Chihuahua.",
+       "maxSeconds": 20
+      },
+      {
+       "id": "l1a-sp2",
+       "type": "speaking",
+       "points": 1,
+       "target": "comparative adjectives",
+       "stem": "Who is taller, you or your best friend?",
+       "accepted": [],
+       "model": "I am taller than my best friend.",
+       "maxSeconds": 20
+      }
+     ]
+    }
+   ]
+  },
+  "B": {
+   "level": 1,
+   "form": "B",
+   "blocks": [
+    {
+     "block": "grammar",
+     "title": "Gramática",
+     "instruction": "Elige la opción correcta.",
+     "items": [
+      {
+       "id": "l1b-gr1",
+       "type": "mcq",
+       "points": 1,
+       "tag": "lesson 1",
+       "stem": "September is the ______ month of the year.",
+       "choices": [
+        "nine",
+        "ninth",
+        "nineth"
+       ],
+       "correct": 1
+      },
+      {
+       "id": "l1b-gr2",
+       "type": "mcq",
+       "points": 1,
+       "tag": "lesson 5",
+       "stem": "______ your teacher from Canada?  -  No, she isn't.",
+       "choices": [
+        "Do",
+        "Is",
+        "Are"
+       ],
+       "correct": 1
+      },
+      {
+       "id": "l1b-gr3",
+       "type": "mcq",
+       "points": 1,
+       "tag": "lesson 9",
+       "stem": "How old ______ your brother?",
+       "choices": [
+        "is",
+        "are",
+        "does"
+       ],
+       "correct": 0
+      },
+      {
+       "id": "l1b-gr4",
+       "type": "mcq",
+       "points": 1,
+       "tag": "lesson 12",
+       "stem": "My sister ______ English at the university.",
+       "choices": [
+        "study",
+        "studies",
+        "studys"
+       ],
+       "correct": 1
+      },
+      {
+       "id": "l1b-gr5",
+       "type": "mcq",
+       "points": 1,
+       "tag": "lesson 16",
+       "stem": "I ______ two cats and a dog at home.",
+       "choices": [
+        "has",
+        "have",
+        "haves"
+       ],
+       "correct": 1
+      },
+      {
+       "id": "l1b-gr6",
+       "type": "mcq",
+       "points": 1,
+       "tag": "lesson 20",
+       "stem": "______ your sister play the guitar?  -  Yes, she can.",
+       "choices": [
+        "Do",
+        "Can",
+        "Is"
+       ],
+       "correct": 1
+      }
+     ]
+    },
+    {
+     "block": "truefalse",
+     "title": "¿Está bien escrito?",
+     "instruction": "Decide si la oración es correcta en inglés.",
+     "items": [
+      {
+       "id": "l1b-tf1",
+       "type": "tf",
+       "points": 1,
+       "sentence": "My mother have a new car.",
+       "correct": false
+      },
+      {
+       "id": "l1b-tf2",
+       "type": "tf",
+       "points": 1,
+       "sentence": "There is a mirror in the bathroom.",
+       "correct": true
+      },
+      {
+       "id": "l1b-tf3",
+       "type": "tf",
+       "points": 1,
+       "sentence": "Diego is as tall as his father.",
+       "correct": true
+      },
+      {
+       "id": "l1b-tf4",
+       "type": "tf",
+       "points": 1,
+       "sentence": "He is the more intelligent student in the class.",
+       "correct": false
+      }
+     ]
+    },
+    {
+     "block": "match",
+     "title": "Relaciona",
+     "instruction": "Une cada palabra con su definición.",
+     "items": [
+      {
+       "id": "l1b-match1",
+       "type": "match",
+       "points": 6,
+       "pairs": [
+        {
+         "left": "notebook",
+         "right": "You write your class notes in it."
+        },
+        {
+         "left": "knee",
+         "right": "The part of your leg that bends in the middle."
+        },
+        {
+         "left": "sofa",
+         "right": "Two or three people can sit on it in the living room."
+        },
+        {
+         "left": "expensive",
+         "right": "It costs a lot of money."
+        },
+        {
+         "left": "dinner",
+         "right": "The last meal of the day."
+        },
+        {
+         "left": "Brazilian",
+         "right": "The nationality of a person from Brazil."
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "block": "gapfill",
+     "title": "Completa el texto",
+     "instruction": "Escribe la palabra que falta. Puedes usar el banco de palabras.",
+     "items": [
+      {
+       "id": "l1b-gap1",
+       "type": "gap",
+       "points": 5,
+       "tag": "Práctica",
+       "wordBank": [
+        "am",
+        "are",
+        "at",
+        "can",
+        "has",
+        "in",
+        "is watching",
+        "There are"
+       ],
+       "segments": [
+        {
+         "kind": "text",
+         "value": "Hello! My name is Pablo and I "
+        },
+        {
+         "kind": "blank",
+         "n": 1,
+         "answer": "am",
+         "accepted": [
+          "am"
+         ]
+        },
+        {
+         "kind": "text",
+         "value": " twenty years old. I live with my family "
+        },
+        {
+         "kind": "blank",
+         "n": 2,
+         "answer": "in",
+         "accepted": [
+          "in"
+         ]
+        },
+        {
+         "kind": "text",
+         "value": " a small house in Chihuahua. "
+        },
+        {
+         "kind": "blank",
+         "n": 3,
+         "answer": "There are",
+         "accepted": [
+          "There are",
+          "there're"
+         ]
+        },
+        {
+         "kind": "text",
+         "value": " two bedrooms and one bathroom in my house. My parents "
+        },
+        {
+         "kind": "blank",
+         "n": 4,
+         "answer": "are",
+         "accepted": [
+          "are"
+         ]
+        },
+        {
+         "kind": "text",
+         "value": " teachers. My sister Elena "
+        },
+        {
+         "kind": "blank",
+         "n": 5,
+         "answer": "has",
+         "accepted": [
+          "has"
+         ]
+        },
+        {
+         "kind": "text",
+         "value": " long black hair and brown eyes. She is "
+        },
+        {
+         "kind": "filled",
+         "value": "the tallest"
+        },
+        {
+         "kind": "text",
+         "value": " person in my family. Right now she "
+        },
+        {
+         "kind": "filled",
+         "value": "is watching"
+        },
+        {
+         "kind": "text",
+         "value": " television in the living room. From Monday to Friday I get up "
+        },
+        {
+         "kind": "filled",
+         "value": "at"
+        },
+        {
+         "kind": "text",
+         "value": " six o'clock, but "
+        },
+        {
+         "kind": "filled",
+         "value": "on"
+        },
+        {
+         "kind": "text",
+         "value": " Sundays I get up late. I "
+        },
+        {
+         "kind": "filled",
+         "value": "can"
+        },
+        {
+         "kind": "text",
+         "value": " play soccer very well."
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "block": "reading",
+     "title": "Lectura",
+     "instruction": "Lee el texto y responde.",
+     "passage": {
+      "title": "Two Brothers, Two Sports",
+      "paragraphs": [
+       "Óscar and Rubén are brothers, but they are very different. Óscar is twenty-two years old and Rubén is nineteen.",
+       "Óscar is a swimmer. He gets up at five o'clock every morning and he trains in the pool for two hours. He is tall and he has very strong arms. He can swim four kilometers without a break.",
+       "Rubén plays basketball. He is taller than Óscar, but he isn't as strong. He trains in the afternoon with his university team. He can jump very high, and he is the best player on the team.",
+       "Their mother says the two brothers are the same in one thing: they are both terrible in the kitchen. Nobody in the family eats their food!"
+      ]
+     },
+     "items": [
+      {
+       "id": "l1b-rd-mc1",
+       "type": "mcq",
+       "points": 1,
+       "stem": "What time does Óscar get up?",
+       "choices": [
+        "At five o'clock.",
+        "At two o'clock.",
+        "In the afternoon."
+       ],
+       "correct": 0
+      },
+      {
+       "id": "l1b-rd-mc2",
+       "type": "mcq",
+       "points": 1,
+       "stem": "What can Rubén do very well?",
+       "choices": [
+        "He can swim four kilometers.",
+        "He can jump very high.",
+        "He can cook."
+       ],
+       "correct": 1
+      },
+      {
+       "id": "l1b-rd-op1",
+       "type": "open",
+       "points": 1,
+       "stem": "How long does Óscar train in the pool?",
+       "accepted": [
+        "He trains for two hours."
+       ],
+       "model": "He trains for two hours."
+      }
+     ]
+    },
+    {
+     "block": "speaking",
+     "title": "Habla",
+     "instruction": "Graba tu respuesta. Unos segundos bastan.",
+     "items": [
+      {
+       "id": "l1b-sp1",
+       "type": "speaking",
+       "points": 1,
+       "target": "verb to be",
+       "stem": "How old are you?",
+       "accepted": [],
+       "model": null,
+       "maxSeconds": 20
+      },
+      {
+       "id": "l1b-sp2",
+       "type": "speaking",
+       "points": 1,
+       "target": "superlative adjectives",
+       "stem": "Who is the tallest person in your family?",
+       "accepted": [],
+       "model": null,
+       "maxSeconds": 20
+      }
+     ]
+    }
+   ]
+  }
+ }
+}
