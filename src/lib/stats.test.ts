@@ -1,5 +1,5 @@
 import { describe as suite, expect, it } from "vitest";
-import { describe, fmt1, groupBy, histogram, pct } from "./stats";
+import { correlation, describe, fmt1, groupBy, histogram, pct } from "./stats";
 
 suite("describe", () => {
   it("computes mean, median, min and max", () => {
@@ -96,5 +96,40 @@ suite("fmt1", () => {
     expect(fmt1(null)).toBe("—");
     expect(fmt1(NaN)).toBe("—");
     expect(fmt1(45.94)).toBe("45.9");
+  });
+});
+
+suite("correlation", () => {
+  it("is 1 for a perfect positive relationship", () => {
+    expect(correlation([1, 2, 3, 4], [2, 4, 6, 8])).toBeCloseTo(1, 10);
+  });
+
+  it("is −1 for a perfect inverse relationship", () => {
+    expect(correlation([1, 2, 3, 4], [8, 6, 4, 2])).toBeCloseTo(-1, 10);
+  });
+
+  it("matches a hand-computed value", () => {
+    // x̄ = 3, ȳ = 4.6 → Sxy = 12, Sxx = 10, Syy = 19.2
+    // r = 12 / √192 = 0.866025… (= √3/2)
+    expect(correlation([1, 2, 3, 4, 5], [2, 4, 5, 4, 8])).toBeCloseTo(Math.sqrt(3) / 2, 10);
+  });
+
+  it("is NULL, not zero, when one side never varies", () => {
+    // An item everybody got right correlates with nothing — that is "we cannot
+    // tell", and printing 0 would report it as "this item does not discriminate".
+    expect(correlation([1, 1, 1, 1], [1, 2, 3, 4])).toBeNull();
+    expect(correlation([1, 2, 3, 4], [5, 5, 5, 5])).toBeNull();
+  });
+
+  it("refuses a sample too small to mean anything", () => {
+    expect(correlation([1, 2], [3, 4])).toBeNull();
+  });
+
+  it("does not depend on scale or offset", () => {
+    const xs = [3, 1, 4, 1, 5, 9];
+    const ys = [2, 7, 1, 8, 2, 8];
+    const a = correlation(xs, ys)!;
+    const b = correlation(xs.map((x) => x * 10 + 3), ys.map((y) => y * 2 - 7))!;
+    expect(a).toBeCloseTo(b, 10);
   });
 });
