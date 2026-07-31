@@ -38,11 +38,21 @@ const SPEC = {
   exitClosesAt: field("exitClosesAt"),
 };
 
-// A window closes at the END of its last day, not at midnight on its first
-// moment. Getting this wrong silently costs the instrument every student who
-// tries on the final afternoon.
-const startOfDay = (iso) => new Date(`${iso}T00:00:00.000Z`);
-const endOfDay = (iso) => new Date(`${iso}T23:59:59.999Z`);
+/**
+ * A window closes at the END of its last day, not at midnight on its first
+ * moment. Getting this wrong silently costs the instrument every student who
+ * tries on the final afternoon.
+ *
+ * ⚠️ Anchored in CHIHUAHUA time, matching `src/lib/zone.ts`, not in UTC. Seeding
+ * `T00:00:00Z` puts the boundary at 18:00 the previous day locally: the admin
+ * panel then shows a window opening on the 9th when the calendar says the 10th,
+ * and — worse — it opens six hours early for real students. This script cannot
+ * import the TS module, so the offset is spelled out here and `zone.test.ts`
+ * pins the value it has to agree with.
+ */
+const CHIHUAHUA_OFFSET = "-06:00";
+const startOfDay = (iso) => new Date(`${iso}T00:00:00.000${CHIHUAHUA_OFFSET}`);
+const endOfDay = (iso) => new Date(`${iso}T23:59:59.999${CHIHUAHUA_OFFSET}`);
 
 const db = new PrismaClient();
 
