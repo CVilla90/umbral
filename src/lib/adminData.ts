@@ -5,6 +5,7 @@ import {
   type AttendanceInput,
   type RosterStudent,
 } from "./exports";
+import { pct } from "./stats";
 
 export interface WindowRef {
   id: string;
@@ -112,4 +113,64 @@ export async function attendanceFor(
     rosterStudents,
     (level, group) => professorByGroup.get(`${level}|${group.toUpperCase()}`) ?? NO_PROFESSOR,
   );
+}
+
+export interface ScoredAttempt {
+  englishLevel: number;
+  group: string;
+  form: string;
+  professorName: string;
+  anchorPct: number | null;
+  levelPct: number | null;
+  totalPct: number | null;
+  durationMin: number | null;
+}
+
+/**
+ * Scored attempts for one window.
+ *
+ * ⚠️ **Only `submitted`/`auto_submitted` attempts.** An in-progress attempt has
+ * null totals and is not a measurement yet; including it would drag every mean
+ * down by however many students happen to have the tab open.
+ *
+ * ⚠️ Every percentage divides by the attempt's OWN stored max, never a constant
+ * — `maxTotal` moved from 34 to 37 during development, and attempts taken under
+ * the old blueprint must keep their own denominator.
+ */
+export async function scoresFor(
+  semesterId: string,
+  windowId: string,
+): Promise<ScoredAttempt[]> {
+  const attempts = await db().attempt.findMany({
+    where: {
+      windowId,
+      state: { in: ["submitted", "auto_submitted"] },
+      enrollment: { semesterId },
+    },
+    select: {
+      englishLevel: true,
+      form: true,
+      anchorRaw: true,
+      levelRaw: true,
+      totalRaw: true,
+      maxAnchor: true,
+      maxLevel: true,
+      maxTotal: true,
+      durationMs: true,
+      enrollment: {
+        select: { group: true, professor: { select: { name: true } } },
+      },
+    },
+  });
+
+  return attempts.map((a) => ({
+    englishLevel: a.englishLevel,
+    group: a.enrollment.group,
+    form: a.form,
+    professorName: a.enrollment.professor?.name ?? NO_PROFESSOR,
+    anchorPct: pct(a.anchorRaw, a.maxAnchor),
+    levelPct: pct(a.levelRaw, a.maxLevel),
+    totalPct: pct(a.totalRaw, a.maxTotal),
+    durationMin: a.durationMs === null ? null : a.durationMs / 60000,
+  }));
 }

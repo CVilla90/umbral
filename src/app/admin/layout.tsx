@@ -30,6 +30,7 @@ export default async function AdminLayout({
 
       <nav className="flex flex-wrap gap-x-6 gap-y-2 border-b border-rule py-4">
         <AdminLink href="/admin">Participación</AdminLink>
+        <AdminLink href="/admin/puntajes">Puntajes</AdminLink>
       </nav>
 
       <main className="flex-1 py-8 sm:py-10">{children}</main>
