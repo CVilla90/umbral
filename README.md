@@ -48,7 +48,13 @@ Listening playback and speaking from a real microphone were both confirmed by
 hand in a normal browser on 2026-07-31 — the two legs no automation in this
 environment can walk. The student path now has no unverified steps.
 
-**Not built yet:** the admin dashboard, the repo, the deploy.
+**Admin dashboard, in progress** (Phase 3): participation with per-professor
+attendance CSV, score distributions, and class-list upload are built and
+verified. Gain, items and manage remain — see `HANDOFF.md §1c`.
+
+**Not deployed yet**, deliberately: the current scope is to finish every phase
+locally first. Google OAuth is registered after a host exists, since the
+redirect URI needs it.
 
 Read **`HANDOFF.md`** first — its banner carries the traps, and §1b is the
 resume procedure. **`PLAN.md`** is the design of record.

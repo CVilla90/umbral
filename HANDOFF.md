@@ -170,12 +170,106 @@ a `tools/*.mjs` script would.
 
 | # | Task | Notes |
 |---|---|---|
-| 0 | **Continue Phase 3, then Phase 4, then push + deploy** | Carlos's call on 2026-07-31, superseding the row below: he wants the app feature-complete before the window opens, not deployed early. Phase 3 remaining = scores, gain, items, manage, roster upload. Phase 4 = exit window logic, complement-form serving, gain reveal, paired export. |
-| 1 | **Repo + deploy — after Phase 4** | ⚠️ repo-local CVilla90 identity **before** the first commit; push over `github-personal`. Then the go-live checklist in §3. ⚠️ `public/audio/listening/*.mp3` (24 files, ~1 MB) must be committed — they are the instrument, not build output. **Ordering rationale:** deploy is the only item with a hard external deadline, and every one of its remaining unknowns lives outside this repo (Google console redirect URI, Replit Postgres, Secrets) where the latency is Carlos's calendar, not build time. Surfacing those blockers early is worth more than having the dashboard ready first — nothing about the dashboard is on the critical path until students have actually submitted. |
+| 0 | **Finish Phase 3 + Phase 4 locally** | Carlos's call 2026-07-31. **Scope is LOCAL ONLY** — no Replit deploy, no Google OAuth registration yet. Exact remaining work is itemized in §1c below. |
+| 1 | **Deploy — only after Phase 4** | ⚠️ repo-local CVilla90 identity **before** the first commit; push over `github-personal`. Then the go-live checklist in §3. ⚠️ `public/audio/listening/*.mp3` (24 files, ~1 MB) must be committed — they are the instrument, not build output. **Ordering rationale:** deploy is the only item with a hard external deadline, and every one of its remaining unknowns lives outside this repo (Google console redirect URI, Replit Postgres, Secrets) where the latency is Carlos's calendar, not build time. Surfacing those blockers early is worth more than having the dashboard ready first — nothing about the dashboard is on the critical path until students have actually submitted. |
 | 2 | **Admin dashboard** | Build while deploy blockers are outstanding. **Attendance/participation first** — it is the only page that matters during a live window, and its logic + CSV are already built and tested in `lib/exports.ts`, so the page is a thin wrapper (query → `attendanceRows` → `attendanceCsv`). Then skill subscores (`lib/skills.ts`, aggregated only — see `PLAN.md §2.4b`), scores, item analysis, manage. ⚠️ **Never compute participation % without a roster** (`pct: null`) — unrostered groups would print 100 % beside a rostered group's 58 %, and that gets read as fact. |
 
 Run the green gate before every commit:
 `npm run typecheck && npm run lint && npm test && npm run build`
+
+⚠️ **`npm run build` takes the single PGlite connection and clobbers `.next`.**
+After building, expect to kill port 3210, `rm -rf .next`, kill/restart port 5433,
+then restart both. This happened four times in S6 alone. Sequence that works:
+
+```powershell
+Get-NetTCPConnection -LocalPort 3210 -State Listen | % { Stop-Process -Id $_.OwningProcess -Force }
+Remove-Item -Recurse -Force .next
+Get-NetTCPConnection -LocalPort 5433 -State Listen | % { Stop-Process -Id $_.OwningProcess -Force }
+npm run db:dev      # background
+npx next dev -p 3210 # background
+```
+
+---
+
+## 1c. Exactly what is left (S6 hand-off)
+
+**State: 8 commits, pushed to `github.com/CVilla90/umbral` (branch `main`).**
+All commits authored `84157850+CVilla90@users.noreply.github.com` — verified.
+164 tests. `npm run dev` on **port 3210** (must match `NEXT_PUBLIC_APP_URL`).
+
+### Built and verified
+
+| Area | Route / file | Verified how |
+|---|---|---|
+| Participation | `/admin` | live 200; `pct: null` path renders "lista no cargada"; flips to 33.3 % once a roster exists |
+| Attendance CSV | `/api/admin/asistencia` | UTF-8 BOM present (`efbbbf`); 403 with no session; `?profesor=` filter |
+| Scores | `/admin/puntajes` | live 200; by level/group/professor/form + histogram |
+| Roster upload | `/admin/lista` | full browser click-through: semicolon file + header + bad row → preview → save → 33.3 % |
+| Admin gate | `src/lib/admin.ts` | student session redirected 307 → `/inicio` |
+| Stats | `src/lib/stats.ts` | 14 tests |
+| Roster parser | `src/lib/roster.ts` | 11 tests |
+
+### ⚠️ Phase 4 is MOSTLY ALREADY BUILT — check before writing anything
+
+Discovered 2026-07-31 by reading the code rather than the plan:
+
+- `attempt.ts → formFor(formOrder, phase)` **already serves the complement
+  form** at exit. Counterbalancing works today.
+- `attempt.ts → gain()` and `daysBetween()` **already exist**.
+- `/resultado` **already renders the gain reveal**, including the negative-gain
+  wording ("Pasa: un día malo, prisa…").
+- `attempt.ts → openWindowFor()` already prefers `entry` when both are open, so
+  someone who never took entry cannot start with exit.
+
+**So Phase 4's real remainder is only:** the paired entry→exit **export**, the
+admin **gain** page, and the **continuity** page scaffold.
+
+### Remaining work, in the recommended order
+
+1. **Gain page (`/admin/avance`) + paired CSV.** One data function serves both:
+   per enrollment, entry `totalRaw/maxTotal`, exit `totalRaw/maxTotal`, `gain()`,
+   `daysBetween()`. ⚠️ **Use the existing `pct`/`gain` from `attempt.ts`, not the
+   one in `stats.ts`** — two `pct` functions now exist and `attempt.ts`'s rounds
+   to 1dp. Include the **form-effect check** (mean gain for AB vs BA students):
+   if counterbalancing works those two numbers should be close, and that is the
+   single most important validity check the instrument can run on itself.
+   ⚠️ Gain is `null` unless BOTH windows exist — never silently zero.
+   ⚠️ This page renders empty until October, **by design**; say so on the page.
+2. **Items page (`/admin/reactivos`).** Per item: p-value (proportion correct),
+   n, mean latency from `Response.msElapsed`, and per-option pick counts for MCQ
+   from `Response.raw`. A p-value near 0 or 1, or an option nobody ever picks, is
+   how a bad item gets caught. ⚠️ `Response.raw` stores the **displayed** index;
+   the authored index needs `optionOrder(...)` from `lib/shuffle.ts` to map back.
+3. **Manage page (`/admin/administrar`).** All of it is editing rows that already
+   exist, which is what makes it post-changeable: `Window.status`
+   (draft/open/paused/closed) + dates; `Professor` CRUD; `GroupAssignment`
+   (level+group → professor); and the **attempt-reopen** action (set `state`
+   back to `in_progress`, clear the score fields — `/api/dev/rewind` already does
+   exactly this and is the model to copy, minus the dev gate).
+4. **Continuity page.** Scaffold only. Empty until a second semester exists **by
+   construction**; the page must say that rather than draw a broken chart.
+
+### Decisions already made — do not relitigate
+
+- Participation % is **null**, never computed, where no roster covers the group.
+- Sample SD (n−1); `n < 2` → `sd: null`, never 0.
+- Every percentage divides by the attempt's **own** stored max.
+- Only `submitted`/`auto_submitted` attempts count as measurements.
+- Only the **Ancla** column compares across levels; the page says so.
+- Roster writing is a **second, explicit action** after a dry-run preview.
+
+### Traps hit in S6 (all cost real time)
+
+- ⚠️ **An uncontrolled input whose `defaultValue` changes between renders gets
+  RESET by React.** This silently broke the roster's Revisar→Guardar flow while
+  typecheck, lint and 11 parser tests stayed green. Only clicking both buttons
+  found it. Any future two-step form must be **controlled**.
+- ⚠️ **PGlite dies constantly** — see the box above. "Can't reach database
+  server" on a page that worked a minute ago is almost always this, not the code.
+- ⚠️ Next dev **inlines the RSC payload next to the HTML**, so grepping rendered
+  HTML double-counts every string. A string appearing twice is not two rows.
+- ⚠️ The dev DB now holds **test roster rows including a fictional
+  `349999 Marta Pérez`**. Not real data.
 
 ---
 
@@ -308,12 +402,13 @@ exists, because the redirect URIs need the real host. He also wants, eventually,
 to be able to generate **Replit-ready projects** so the Replit agent has nothing
 left to do — he will bring that documentation back from Replit later.
 
-**Git repo initialized** (`0f03a48`). Identity was set to the CVilla90 noreply
-**before** the first commit; staged content was scanned for key-shaped strings;
-`.env` and `.pgdata/` excluded; all 24 MP3s committed. `github-personal` remote
-configured and verified (`ssh -T` answers "Hi CVilla90!"). ⚠️ **Nothing is
-pushed — `CVilla90/umbral` does not exist yet, and `gh` here is the WORK account
-so Carlos must create it by hand.**
+**Git repo initialized and PUSHED** to `github.com/CVilla90/umbral` (branch
+`main`). Identity was set to the CVilla90 noreply **before** the first commit;
+staged content was scanned for key-shaped strings; `.env` and `.pgdata/`
+excluded; all 24 MP3s committed. Pushed over the `github-personal` SSH alias
+(`ssh -T` answers "Hi CVilla90!"), never `gh` — which is authed as the WORK
+account here and must never write to a CVilla90 repo. Carlos created the empty
+repo by hand, as required.
 
 **Done so far:** participation page (`/admin`) + attendance CSV
 (`/api/admin/asistencia`). `lib/admin.ts` gates all of `/admin/*` from the layout.
