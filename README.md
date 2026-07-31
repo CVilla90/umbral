@@ -30,7 +30,7 @@ track (Coordinación de Inglés, FCCF) — **not Creai work**.
 **The student path works end to end** (2026-07-31): sign-in → ficha → 28-screen
 check-in → result, all four levels, both forms, **all eight blocks**. Verified by
 walking it and reading back what the database stored, not by inspection.
-126 tests, `next build` clean.
+227 tests, `next build` clean.
 
 The instrument is **37 points**, the number the blueprint always specified: the
 24 listening clips were authored on 2026-07-31 rather than deleting the block.
@@ -48,13 +48,30 @@ Listening playback and speaking from a real microphone were both confirmed by
 hand in a normal browser on 2026-07-31 — the two legs no automation in this
 environment can walk. The student path now has no unverified steps.
 
-**Admin dashboard, in progress** (Phase 3): participation with per-professor
-attendance CSV, score distributions, and class-list upload are built and
-verified. Gain, items and manage remain — see `HANDOFF.md §1c`.
+**The admin dashboard is complete** (Phases 3 and 4, 2026-07-31) — seven pages:
+participación · puntajes · avance · reactivos · listas · continuidad ·
+administrar, with per-professor attendance CSV and a paired entry→exit export in
+the wide format a paired t-test wants.
 
-**Not deployed yet**, deliberately: the current scope is to finish every phase
-locally first. Google OAuth is registered after a host exists, since the
-redirect URI needs it.
+Two of them are the ones worth naming. **Avance** carries the AB-vs-BA
+form-effect check: half the cohort takes A then B and half takes B then A, so if
+the forms are genuinely parallel both halves must show the same mean gain. That
+is the instrument auditing itself, and it is why §2.1 chose counterbalanced forms
+over per-student random sampling. **Reactivos** reports each question's
+difficulty *and* its corrected item–total discrimination — a p-value alone cannot
+distinguish a hard question from a miskeyed one, and a negative discrimination is
+exactly the defect the inherited paper banks were already measured to carry.
+
+Everything on **Administrar** is a row, not code: window dates and status,
+professors, group→professor mapping, attempt reopen. Next semester is typing.
+
+Because gain and item statistics cannot render anything until the exit window
+runs in December, a dev-only route fabricates a cohort that has taken both
+windows — writing through the real scoring path, so the dashboards were verified
+against the instrument rather than against invented numbers. See `HANDOFF.md §1c`.
+
+**Not deployed yet** — the only remaining work in the project. Google OAuth is
+registered after a host exists, since the redirect URI needs it.
 
 Read **`HANDOFF.md`** first — its banner carries the traps, and §1b is the
 resume procedure. **`PLAN.md`** is the design of record.

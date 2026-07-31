@@ -806,15 +806,42 @@ speaking proven against the live API and then by hand with a real microphone.
 > submitted. Build it while the external blockers are outstanding, not instead of
 > clearing them.
 
-### Phase 3 — dashboard + exports, through September
+### Phase 3 — dashboard + exports ✅ **DONE 2026-07-31**, budgeted through September
 
 Overview first (participation is what matters during a live window), then scores,
 items, exports, manage. Nothing here blocks the entry window.
 
-### Phase 4 — exit readiness, by 2026-10-04
+Landed as seven pages: participación · puntajes · avance · reactivos · listas ·
+continuidad · administrar. Two things came out differently from the sketch:
+
+- **Item analysis grew a discrimination column.** A p-value alone cannot tell a
+  hard item from a broken one. The corrected item–total correlation can, and a
+  negative one is the signature of the exact defect the inherited paper banks
+  were already measured to carry (§10 of `english_test_generator/PLAN.md`).
+- **Manage turned out to be the phase's real deliverable.** Every question that
+  would otherwise have needed a code change in January — window dates, professor
+  names, group→professor mapping — is a row edited from that page.
+
+### Phase 4 — exit readiness ✅ **DONE 2026-07-31**, budgeted by 2026-10-04
 
 Exit window logic · complement-form serving · gain reveal on the result screen ·
 paired export · continuity page scaffolded.
+
+Most of it was **already built inside Phase 1** and only discovered on
+2026-07-31 by reading the code rather than the plan: `formFor()` already served
+the complement form at exit, `gain()` and `daysBetween()` already existed, and
+`/resultado` already rendered the gain reveal. What remained was the paired
+export, the admin gain page and the continuity scaffold.
+
+The gain page carries the **AB-vs-BA form-effect check**, which is the single
+most important validity test this instrument can run on itself — and the reason
+§2.1 chose counterbalanced forms over per-student random sampling. Random
+sampling would have made the check impossible to even define.
+
+> **⚠️ Every phase except the deploy is now done.** Phase 1's deploy is the only
+> outstanding item in the whole project, and the only one with a hard external
+> date. Its blockers live outside this repo: Replit Postgres and Secrets, and the
+> Google console redirect URI, which needs the host to exist first.
 
 ---
 

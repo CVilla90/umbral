@@ -34,6 +34,20 @@
 >   never zoom back out.** Most students are mobile-first. Audit with a
 >   same-origin narrow iframe — `resize_window` does not work in the automation
 >   browser, and media queries do evaluate correctly inside an iframe.
+> - ⚠️ **Dates are CHIHUAHUA days, never the server's local time** (`lib/zone.ts`).
+>   This laptop is UTC−6 and Replit is UTC, so `new Date("2026-08-10")` means two
+>   different instants in the two places — at a day boundary, a whole day. The
+>   seed was writing UTC midnight, which displayed as **the 9th** in the admin
+>   panel and would have opened the window six hours early. `closesAt` is
+>   **inclusive**, so a closing day is stored at `23:59:59.999` local; midnight
+>   would shut the window a day early on exactly the students who leave it to the
+>   last day. `tools/seed.mjs` cannot import TS, so it re-declares the offset and
+>   `zone.test.ts` pins the two together.
+> - ⚠️ **`Response.raw` for an mcq stores BOTH indices — `{ authored, shown }`.**
+>   (An earlier note in this file said it stored only the displayed index and had
+>   to be remapped through `optionOrder`. It does not.) Item analysis reads
+>   `authored` directly; re-deriving it through the shuffle would risk disagreeing
+>   with what was actually graded.
 > - ⚠️ **Speaking is scored on INTELLIGIBILITY, not wording** — every speaking
 >   item has `accepted: []` and `bank.test.ts` enforces it. Until 2026-07-31 form
 >   A demanded a verbatim CLAVE sentence while form B accepted anything, which
@@ -82,12 +96,19 @@
 | Player | ✅ `/prueba` — mcq · tf · match · cloze · reading, resume, per-item save |
 | Result | ✅ `/resultado` incl. the gain reveal |
 | Skill subscores | ✅ `lib/skills.ts` — derived from `Response.block`, no migration, retroactive |
-| Attendance export | ✅ `lib/exports.ts` — logic + CSV + optional per-group rosters, tested; ⬜ needs the dashboard page + a CSV upload to surface it |
+| Attendance export | ✅ `lib/exports.ts` + `/api/admin/asistencia`, per-professor filter, UTF-8 BOM |
 | **Listening** | ✅ **24 clips authored + generated**, registered, validated — takes the instrument to **37** |
 | **Speaking** | ✅ route + recorder + UI + ceilings built **and proven live** — webm/ogg/mp4 × both models |
-| Admin dashboard | ⬜ Phase 3 |
-| Repo | ⬜ not initialized · target `CVilla90/umbral` |
-| Deployment | ⬜ not created |
+| **Admin dashboard** | ✅ **Phase 3 + 4 complete** — 7 pages, all exercised with data |
+| ↳ Participación | ✅ `/admin` — 4 states, per professor, CSV |
+| ↳ Puntajes | ✅ `/admin/puntajes` — by level/group/professor/form + histogram |
+| ↳ Avance | ✅ `/admin/avance` — gain, direction, **AB-vs-BA form-effect check**, paired CSV |
+| ↳ Reactivos | ✅ `/admin/reactivos` — p-value, discrimination, latency, per-option picks, flags |
+| ↳ Listas | ✅ `/admin/lista` — paste-first roster, dry-run then save |
+| ↳ Continuidad | ✅ `/admin/continuidad` — scaffold, empty by construction until 2027 |
+| ↳ Administrar | ✅ `/admin/administrar` — windows, professors, groups, attempt reopen, audited |
+| Repo | ✅ `github.com/CVilla90/umbral`, branch `main` |
+| Deployment | ⬜ not created — **the only thing left** |
 
 **Verified by walking it and reading the database back, not by inspection**
 (2026-07-31): a fresh level-3 student walked to the listening block, and the row
@@ -96,7 +117,7 @@ raw={"shown":2,"authored":2}` — i.e. the per-attempt shuffle mapped the displa
 option back to the authored answer correctly. The attempt carried
 `maxTotal=37` and a **28-item** snapshot (was 34 / 25).
 
-Green gate passes: `tsc` · `eslint` · **126 tests** · `next build`.
+Green gate passes: `tsc` · `eslint` · **227 tests** · `next build`.
 
 Live Gemini transcription, measured 2026-07-31 (one clip, three transcodes):
 
@@ -191,85 +212,95 @@ npx next dev -p 3210 # background
 
 ---
 
-## 1c. Exactly what is left (S6 hand-off)
+## 1c. Exactly what is left (S7 hand-off)
 
-**State: 8 commits, pushed to `github.com/CVilla90/umbral` (branch `main`).**
-All commits authored `84157850+CVilla90@users.noreply.github.com` — verified.
-164 tests. `npm run dev` on **port 3210** (must match `NEXT_PUBLIC_APP_URL`).
+**All four phases are built and exercised locally. The only thing left is
+deployment**, which is Carlos's call and needs a host to exist first.
 
-### Built and verified
+### The remaining sequence, in order
+
+1. **Push to GitHub** — done each session over the `github-personal` SSH alias.
+2. **Deploy to Replit.** Needs `DATABASE_URL` from Replit Postgres, then
+   `db:push` and `db:seed`. **Drop `?connection_limit=1&pgbouncer=true`** from
+   the URL — that is a PGlite-only workaround.
+3. **Set the env vars**: `GEMINI_API_KEY`, `SESSION_SECRET`, `ADMIN_EMAILS`,
+   `NEXT_PUBLIC_APP_URL`, `SPEAKING_ENABLED=true`, Google client id/secret.
+   **`DEV_LOGIN` must be absent.**
+4. **Confirm `/api/auth/dev` and `/api/dev/demo` both 404 on the host** before
+   opening the window. They are double-gated, but confirm it rather than assume.
+5. **Register the Google OAuth client** inside the `@uach.mx` organisation and
+   add the redirect URI. This is why deployment comes first: the URI needs a host.
+6. **Re-seed the real window dates.** The local entry window was widened to
+   2026-07-30 → 2026-10-03 for testing. Production wants `lib/calendar.ts`'s
+   values, or whatever Carlos sets in `/admin/administrar`.
+7. **Run `tools/smoke-speaking.mjs` against the host** — the Gemini path is the
+   one thing a deploy can break invisibly.
+
+### ⚠️ The dev database contains a FABRICATED cohort
+
+`/api/dev/demo?n=48` created **48 demo students with both windows completed**, so
+the dashboard could be verified with data in it rather than shipping in August
+having never been seen populated. They are marked two ways:
+
+- every name ends in **`DEMO`**
+- `User.googleId` starts with **`demo:`**
+
+**`/api/dev/demo?clean=1` deletes exactly those and everything they wrote**
+(enrollments, attempts and responses cascade). Also present from earlier
+sessions: `A349021` / `349777` test students and a fictional roster row
+`349999 Marta Pérez`. **None of this is real data.**
+
+The route is gated by `devToolsEnabled()` like every other dev route, and it
+writes through `gradeItem` and `submitAttempt` — **the real scoring path** — so
+the dashboards were checked against the instrument rather than against numbers
+the seeder made up.
+
+### Built and verified this session
 
 | Area | Route / file | Verified how |
 |---|---|---|
-| Participation | `/admin` | live 200; `pct: null` path renders "lista no cargada"; flips to 33.3 % once a roster exists |
-| Attendance CSV | `/api/admin/asistencia` | UTF-8 BOM present (`efbbbf`); 403 with no session; `?profesor=` filter |
-| Scores | `/admin/puntajes` | live 200; by level/group/professor/form + histogram |
-| Roster upload | `/admin/lista` | full browser click-through: semicolon file + header + bad row → preview → save → 33.3 % |
-| Admin gate | `src/lib/admin.ts` | student session redirected 307 → `/inicio` |
-| Stats | `src/lib/stats.ts` | 14 tests |
-| Roster parser | `src/lib/roster.ts` | 11 tests |
-
-### ⚠️ Phase 4 is MOSTLY ALREADY BUILT — check before writing anything
-
-Discovered 2026-07-31 by reading the code rather than the plan:
-
-- `attempt.ts → formFor(formOrder, phase)` **already serves the complement
-  form** at exit. Counterbalancing works today.
-- `attempt.ts → gain()` and `daysBetween()` **already exist**.
-- `/resultado` **already renders the gain reveal**, including the negative-gain
-  wording ("Pasa: un día malo, prisa…").
-- `attempt.ts → openWindowFor()` already prefers `entry` when both are open, so
-  someone who never took entry cannot start with exit.
-
-**So Phase 4's real remainder is only:** the paired entry→exit **export**, the
-admin **gain** page, and the **continuity** page scaffold.
-
-### Remaining work, in the recommended order
-
-1. **Gain page (`/admin/avance`) + paired CSV.** One data function serves both:
-   per enrollment, entry `totalRaw/maxTotal`, exit `totalRaw/maxTotal`, `gain()`,
-   `daysBetween()`. ⚠️ **Use the existing `pct`/`gain` from `attempt.ts`, not the
-   one in `stats.ts`** — two `pct` functions now exist and `attempt.ts`'s rounds
-   to 1dp. Include the **form-effect check** (mean gain for AB vs BA students):
-   if counterbalancing works those two numbers should be close, and that is the
-   single most important validity check the instrument can run on itself.
-   ⚠️ Gain is `null` unless BOTH windows exist — never silently zero.
-   ⚠️ This page renders empty until October, **by design**; say so on the page.
-2. **Items page (`/admin/reactivos`).** Per item: p-value (proportion correct),
-   n, mean latency from `Response.msElapsed`, and per-option pick counts for MCQ
-   from `Response.raw`. A p-value near 0 or 1, or an option nobody ever picks, is
-   how a bad item gets caught. ⚠️ `Response.raw` stores the **displayed** index;
-   the authored index needs `optionOrder(...)` from `lib/shuffle.ts` to map back.
-3. **Manage page (`/admin/administrar`).** All of it is editing rows that already
-   exist, which is what makes it post-changeable: `Window.status`
-   (draft/open/paused/closed) + dates; `Professor` CRUD; `GroupAssignment`
-   (level+group → professor); and the **attempt-reopen** action (set `state`
-   back to `in_progress`, clear the score fields — `/api/dev/rewind` already does
-   exactly this and is the model to copy, minus the dev gate).
-4. **Continuity page.** Scaffold only. Empty until a second semester exists **by
-   construction**; the page must say that rather than draw a broken chart.
+| Gain + form effect | `/admin/avance` | 48-student paired cohort; AB +9.5 vs BA +8.6, difference **+0.9** |
+| Paired CSV | `/api/admin/avance` | 52 lines, BOM, `70.3 − 56.8 = 13.5` — the file's own columns agree |
+| Item analysis | `/admin/reactivos` | 2 items flagged at n ≈ 48; easy/hard/dead-option flags correctly silent |
+| Windows | `/admin/administrar` | saved through the form; close-before-open rejected; date round-tripped |
+| Professors | `/admin/administrar` | added; **case-insensitive duplicate rejected** ("ramírez gómez" vs "Ramírez Gómez") |
+| Groups | `/admin/administrar` | assigning Inglés 2-B **retroactively reassigned 5 enrolled students** |
+| Reopen | `/admin/administrar` | two-step confirm; **28 responses preserved**; coverage moved 48 → 46 |
+| Continuity | `/admin/continuidad` | single-semester message; series table populated |
+| Mobile | all 7 admin pages | 390 px iframe: no sideways scroll, no sub-16px input, no tap target < 24 px |
+| Timezone | `lib/zone.ts` | 10 tests incl. a guard pinning `tools/seed.mjs`'s hardcoded offset |
 
 ### Decisions already made — do not relitigate
 
 - Participation % is **null**, never computed, where no roster covers the group.
-- Sample SD (n−1); `n < 2` → `sd: null`, never 0.
+- Sample SD (n−1); `n < 2` → `sd: null`, never 0. Correlation → `null` when a
+  side has no variance, never 0.
 - Every percentage divides by the attempt's **own** stored max.
 - Only `submitted`/`auto_submitted` attempts count as measurements.
-- Only the **Ancla** column compares across levels; the page says so.
-- Roster writing is a **second, explicit action** after a dry-run preview.
+- Gain is computed from the **rounded** percentages, so an analyst subtracting
+  the two CSV columns gets the third back.
+- Only the **Ancla** column compares across levels *or* across semesters.
+- Roster writing and attempt reopening are both **second, explicit actions**.
+- Admin reopen **keeps every response** and clears only derived scores. It is
+  NOT `/api/dev/rewind`, which deletes responses — right for a developer
+  re-walking a screen, catastrophic for a real student.
 
-### Traps hit in S6 (all cost real time)
+### Traps hit in S7
 
-- ⚠️ **An uncontrolled input whose `defaultValue` changes between renders gets
-  RESET by React.** This silently broke the roster's Revisar→Guardar flow while
-  typecheck, lint and 11 parser tests stayed green. Only clicking both buttons
-  found it. Any future two-step form must be **controlled**.
-- ⚠️ **PGlite dies constantly** — see the box above. "Can't reach database
-  server" on a page that worked a minute ago is almost always this, not the code.
-- ⚠️ Next dev **inlines the RSC payload next to the HTML**, so grepping rendered
-  HTML double-counts every string. A string appearing twice is not two rows.
-- ⚠️ The dev DB now holds **test roster rows including a fictional
-  `349999 Marta Pérez`**. Not real data.
+- ⚠️ **The seed was writing UTC midnight**, so the admin panel showed a window
+  opening on the 9th when the calendar said the 10th. Fixed in `lib/zone.ts` +
+  `tools/seed.mjs`. Any date that reaches the database goes through
+  `startOfDay`/`endOfDay`.
+- ⚠️ **`revalidatePath` in a server action destroys the message that action just
+  returned**, if the revalidated markup replaces the client component holding it.
+  The reopen action performed its work and reported nothing — including its
+  closed-window warning. `reopenAttempt` deliberately does not revalidate.
+- ⚠️ A **ref-based click** on the window Guardar button silently did not submit;
+  the same button worked by coordinate and by `.click()`. When a browser action
+  appears to do nothing, try another way of clicking before suspecting the code.
+- ⚠️ My own earlier note in this file claimed `Response.raw` stored only the
+  displayed index. **It stores `{ authored, shown }`.** Corrected in the banner.
+
 
 ---
 
@@ -393,7 +424,73 @@ Three requests from Carlos, all late in the session, none of them shipped as UI:
   `Response.raw` stores what was typed, so a past semester can be re-scored both
   ways and compared before the rule ever affects a reported number.
 
-### S6 — 2026-07-31 · Phase 3 begins (IN PROGRESS)
+### S7 — 2026-07-31 · Phases 3 and 4 finished
+
+**Carlos's directive:** *"Long horizon one shot as far as you can… The scope is
+to finish all 4 phases (the full project) on a local scenario (we are not pushing
+yet to replit nor registering in google's oauth)."* Critical questions were to be
+turned architecturally into things that can be changed after the fact.
+
+Built, in the order §1c had recommended:
+
+1. **`/admin/avance` + `/api/admin/avance`** — gain per student, coverage, up/flat/down
+   counts, tables by level/group/professor, and the **AB-vs-BA form-effect
+   check**. The pure layer is `lib/progress.ts` (24 tests).
+2. **`/admin/reactivos`** — `lib/items.ts` (23 tests): p-value generalised to
+   proportion-of-points so a 6-point match item sits on the same scale as a
+   1-point question, **corrected item–total discrimination**, median latency, and
+   per-option pick counts.
+3. **`/admin/administrar`** — windows, professors, group mapping and attempt
+   reopen, every write audited through a new `audit()` helper.
+4. **`/admin/continuidad`** — scaffold, empty by construction until 2027.
+
+**How the "turn questions into post-changeable things" instruction was applied.**
+Every question I might have asked became a row instead of a decision: window
+dates and status, professor names, group→professor mapping. None of them needs a
+deploy to change, so none of them needed an answer today.
+
+**The discrimination number is the one that earns this page its keep.** A
+p-value alone cannot tell a hard item from a broken one — both look like "few
+students got it right". Discrimination separates them: negative means *the
+strongest students are getting it wrong*, which is a miskeyed answer, and it is
+the exact defect class the inherited paper banks were already known to carry.
+The item's own points are removed from the total before correlating, because
+with 28 items an item correlated against a total it belongs to flatters itself
+most where it is weakest.
+
+**Fabricated a cohort in order to verify any of it.** Gain, form effect,
+discrimination and the distributions are all *unrenderable* until December, so
+they would otherwise have shipped in August having never been seen with data in
+them. `/api/dev/demo` writes 48 students through `gradeItem` and `submitAttempt`
+— **the real scoring path** — because verifying dashboards against numbers the
+seeder invented would have proved nothing. Marked `DEMO` / `demo:`; `?clean=1`
+removes them.
+
+**The timezone bug the work uncovered.** Building the window editor forced the
+question of what a date *means*, and the answer was that the seed had been
+writing UTC midnight: the admin panel showed the entry window opening on the 9th
+when the calendar said the 10th, and on a UTC host it would have opened six
+hours early and closed a day early. `lib/zone.ts` pins everything to
+`America/Chihuahua`; `closesAt` is stored at the last instant of its day because
+`windowIsOpen` is inclusive. `tools/seed.mjs` is plain node and cannot import
+TS, so it re-declares the offset and `zone.test.ts` asserts the two agree —
+duplication with a guard rather than a comment asking someone to remember.
+
+**Corrected my own earlier note.** §1c had said `Response.raw` stored only the
+displayed index and needed remapping through `optionOrder`. Reading the save path
+showed it stores `{ authored, shown }`. Item analysis reads `authored` directly;
+re-deriving it could have disagreed with what was actually graded.
+
+**Two defects found by clicking rather than by testing.** A `revalidatePath` in
+the reopen action was destroying the very message that action returned — the
+admin saw nothing happen, including the warning that the window was closed. And
+a ref-based click on the window Guardar button silently failed to submit, which
+briefly looked like a broken action and was not.
+
+Green gate: `tsc` · `eslint` · **227 tests** · `next build`. Mobile re-audited at
+390 px across all seven admin pages.
+
+### S6 — 2026-07-31 · Phase 3 begins
 
 **Carlos's directive:** get the full app ready before 2026-08-10, ideally today.
 Order agreed: **finish Phase 3, then Phase 4, then push + deploy.** He will create
