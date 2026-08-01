@@ -747,9 +747,15 @@ GEMINI_API_KEY=              # reuse from uach_english_progress/.env line 15
 NEXT_PUBLIC_APP_URL=
 ADMIN_EMAILS=cavilla@uach.mx
 SESSION_SECRET=
-EXPORT_PSEUDO_SALT=
 SPEAKING_ENABLED=true
 ```
+
+> `EXPORT_PSEUDO_SALT` was listed here and shipped in `.env.example`, but nothing
+> ever read it: the pseudonymised exports of §9 were designed and not built. It
+> was removed on 2026-07-31 rather than left to imply that the CSVs are anonymous
+> when they carry real matrículas, names and emails. That is the right shape for a
+> professor chasing an absent student, and it is why every export route sits
+> behind `ADMIN_EMAILS`.
 
 Carlos adds the deployed redirect URI to the Google console at go-live:
 `https://<host>/api/auth/google/callback`.
@@ -889,5 +895,48 @@ demographics-first flow. Those were right.
 3. **Entry window close date** — midpoint as chosen, or the three-week close
    recommended in §4.1? Answerable after seeing week-1 uptake; the field is
    admin-editable either way.
-4. **Name** — `Umbral` unless the Replit subdomain collides; then Delta, Pulso or
-   Cota (§11).
+4. ~~**Name**~~ — **settled 2026-07-31.** `umbral.replit.app` *was* taken, but the
+   product name did not have to move with the subdomain: the host is
+   **`umbral-ingles.replit.app`** and the brand stays `Umbral`. Delta, Pulso and
+   Cota are retired.
+
+---
+
+## 16. Possible later: a PWA
+
+Not built, and deliberately not started. `src/app/manifest.ts` exists as metadata
+only — there is **no service worker**, which is also why no install prompt can
+appear. This section is here so that whoever picks it up inherits the reasoning
+rather than the enthusiasm.
+
+**The honest value is small and specific.** Three candidate wins, ranked:
+
+1. **Precaching the 24 listening clips.** They are static, immutable, and their
+   download over campus wifi is the likeliest real failure in the whole student
+   path. This is the one genuinely good reason to add a service worker.
+2. **Surviving a connection blip** mid-attempt without losing the screen.
+3. **A home-screen icon.** Nearly worthless — a student opens this twice a
+   semester. Needs 192px and 512px PNGs, which the SVG-only manifest lacks.
+
+**What a PWA must not do here**, because an assessment instrument breaks in ways
+an ordinary app does not:
+
+- **Never cache item content.** Cached items are extractable from the device, and
+  a stale item served in October that differs from August's silently destroys the
+  comparison the whole project exists to make.
+- **Never cache the app shell across a window boundary.** If scoring logic changes
+  between August and October, a student running the August bundle is measured by
+  a different instrument than their classmate — and nothing would report it. Any
+  service worker must be versioned by build ID and update eagerly, not lazily.
+- **Never queue responses for later sync without server-side window checks.** A
+  response recorded offline and flushed days later could land after `closesAt`,
+  or after an attempt was scored or reopened. The window check must live on the
+  server and key off arrival, never off a client timestamp.
+- **Never advertise offline completion.** Speaking calls Gemini, so an attempt
+  cannot be finished offline. A student who completes 35 of 37 points offline has
+  produced a non-comparable attempt, which is worse than one they could not start.
+
+**Trigger to revisit:** participation data showing drop-off concentrated on the
+listening screens, or audio load failures in the wild. Absent that evidence this
+is speculative work on a working instrument — and §1 is explicit that the
+instrument is what must not be compromised.

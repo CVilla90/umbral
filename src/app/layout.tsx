@@ -1,7 +1,8 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Archivo, Karla, IBM_Plex_Mono } from "next/font/google";
 import "./globals.css";
-import { BRAND, BRAND_NOTE } from "@/lib/site";
+import { appUrl } from "@/lib/auth/google";
+import { BRAND, BRAND_NOTE, FACULTY, UNIVERSITY } from "@/lib/site";
 
 // Archivo (Omnibus-Type, Buenos Aires) — an industrial grotesque with scoreboard
 // and jersey lineage, set heavy and tight. A Latin American face on a Mexican
@@ -26,10 +27,40 @@ const mono = IBM_Plex_Mono({
   weight: ["400", "500", "600"],
 });
 
+const DESCRIPTION =
+  "Medición de inglés al empezar y al terminar el semestre. Veinte minutos, sin calificación. Solo para cuentas @uach.mx de la Facultad de Ciencias de la Cultura Física.";
+
 export const metadata: Metadata = {
-  title: `${BRAND} — ${BRAND_NOTE}`,
-  description:
-    "Medición de inglés al empezar y al terminar el semestre. Veinte minutos, sin calificación. Solo para cuentas @uach.mx de la Facultad de Ciencias de la Cultura Física.",
+  // Absolute base for the OG image and icons. Relative URLs in a link preview
+  // are resolved by the *scraper*, not the browser, and WhatsApp will simply
+  // drop an image it cannot resolve — so this has to be the real origin.
+  metadataBase: new URL(appUrl()),
+  title: {
+    default: `${BRAND} — ${BRAND_NOTE}`,
+    template: `%s · ${BRAND}`,
+  },
+  description: DESCRIPTION,
+  applicationName: BRAND,
+  authors: [{ name: "Carlos Villa" }],
+  // The instrument is institutional, not commercial; `publisher` is where a
+  // student's browser looks to see who is actually behind the page.
+  publisher: `${FACULTY}, ${UNIVERSITY}`,
+  openGraph: {
+    type: "website",
+    locale: "es_MX",
+    siteName: BRAND,
+    title: `${BRAND} — ${BRAND_NOTE}`,
+    description: DESCRIPTION,
+  },
+  // No Twitter card of its own: the OG tags already cover it, and a second
+  // source of the same strings is a second thing to keep in step.
+  formatDetection: { telephone: false, address: false, email: false },
+};
+
+export const viewport: Viewport = {
+  // Matches `--color-paper`, so the phone's chrome does not flash a white or
+  // black band around a page that is neither.
+  themeColor: "#f1f3ef",
 };
 
 // The interface is in Spanish on purpose (PLAN §8): if the chrome were in English,

@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" role="img" aria-label="Umbral">
+  <!--
+    Stable-path copy of `src/app/icon.svg`, for the web manifest: the App Router
+    serves its own icon from a content-hashed URL that a static manifest cannot
+    name. Keep the two in sync — they are the same mark.
+  -->
+  <rect width="32" height="32" rx="7" fill="#101a24"/>
+  <rect x="6" y="5" width="3.8" height="22" rx="1.1" fill="#ff5a1f"/>
+  <rect x="22.2" y="5" width="3.8" height="22" rx="1.1" fill="#ff5a1f"/>
+  <rect x="9.8" y="19.3" width="12.4" height="3.4" fill="#f1f3ef"/>
+</svg>
