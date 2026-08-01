@@ -70,8 +70,10 @@ runs in December, a dev-only route fabricates a cohort that has taken both
 windows — writing through the real scoring path, so the dashboards were verified
 against the instrument rather than against invented numbers. See `HANDOFF.md §1c`.
 
-**Not deployed yet** — the only remaining work in the project. Google OAuth is
-registered after a host exists, since the redirect URI needs it.
+**Not deployed yet** — the only remaining work in the project. The ordered
+procedure is in **`DEPLOY.md`**; `.replit` is committed so the import configures
+itself. Google OAuth is registered after the host exists, since the redirect URI
+needs the real URL.
 
 Read **`HANDOFF.md`** first — its banner carries the traps, and §1b is the
 resume procedure. **`PLAN.md`** is the design of record.

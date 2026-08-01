@@ -217,6 +217,10 @@ npx next dev -p 3210 # background
 **All four phases are built and exercised locally. The only thing left is
 deployment**, which is Carlos's call and needs a host to exist first.
 
+**The step-by-step procedure now lives in `DEPLOY.md`**, and `.replit` is
+committed so the Replit import configures its own build and run commands. The
+summary below is the same sequence in one screen.
+
 ### The remaining sequence, in order
 
 1. **Push to GitHub** — done each session over the `github-personal` SSH alias.

@@ -1,0 +1,21 @@
+modules = ["nodejs-22", "postgresql-16"]
+
+# The Run button inside the workspace. Replit's webview forwards port 5000, so
+# the dev server is told to use it explicitly rather than Next's default 3000.
+run = "npm run dev -- -p 5000 -H 0.0.0.0"
+
+[deployment]
+# Autoscale, not Reserved VM: this app is request-driven and idle most of the
+# semester. It holds no in-memory state between requests — sessions are signed
+# cookies and everything else is in Postgres — so scaling to zero costs nothing.
+deploymentTarget = "autoscale"
+build = ["npm", "run", "build"]
+# `next start` binds the PORT that Replit provides. Do not hardcode a port here.
+run = ["npm", "run", "start"]
+
+[[ports]]
+localPort = 5000
+externalPort = 80
+
+[env]
+NEXT_TELEMETRY_DISABLED = "1"
