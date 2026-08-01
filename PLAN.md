@@ -940,3 +940,56 @@ an ordinary app does not:
 listening screens, or audio load failures in the wild. Absent that evidence this
 is speculative work on a working instrument — and §1 is explicit that the
 instrument is what must not be compromised.
+
+---
+
+## 17. Requested, not yet built
+
+Both asked for by Carlos on **2026-08-01**, the night of the deploy, after signing
+in to the live host for the first time.
+
+### 17.1 The admin should never be handed the student's closed-window screen
+
+Signing in as the admin lands on `/inicio`, which renders *student* state — on
+2026-08-01 that is *"Todavía no abre. La medición de entrada abre el 10 de
+agosto."*, and nothing onward.
+
+**`/admin` is not window-gated.** It passes through `requireAdmin()` in
+`admin/layout.tsx` and nothing else, so it is reachable by typing the URL. The
+defect is discoverability, not access.
+
+It is still worth fixing, because the screen concealing the dashboard is the one
+whose `/admin/administrar` page edits window dates. A window state that hides the
+control for changing window state is a circular lock — harmless while he
+remembers the URL, confusing the first day he doesn't, and worst precisely when
+something about the dates is wrong.
+
+Shape: an admin link on `/inicio`, and consider defaulting the post-sign-in
+redirect to `/admin` for admin emails — `safeNext()` falls back to `/inicio` for
+everyone today. Keep `/inicio` reachable for admins either way: seeing exactly
+what a student sees, including the closed-window copy, is worth having.
+
+### 17.2 `Facultad` as a ficha field, for offering Umbral to other faculties
+
+A dropdown on the ficha, FCCF as the default.
+
+Three things that are not obvious from the request:
+
+- **Nothing currently blocks other faculties.** `ALLOWED_EMAIL_DOMAIN` is
+  `uach.mx`, not a faculty, and `FACULTY` in `site.ts` is a label rather than a
+  gate. A student from another faculty can sign in and take the instrument
+  *today* — they would simply be recorded as FCCF. The field formalises something
+  already possible rather than opening a door.
+- **Add it between semesters, never inside a window.** A ficha question introduced
+  mid-window means some students in one measurement answered it and others did
+  not, and the entry cohort would differ from the exit cohort in what was
+  collected about them.
+- **The curriculum is the real question, not the dropdown.** Levels are Sparkling
+  1–4, which is FCCF's ladder. A faculty on a different syllabus needs either its
+  own bank or an agreement that the cross-level anchor block (§2.2) is the common
+  ruler and the level labels are local. The anchor was designed for exactly that
+  kind of comparison, so the instrument is closer to portable than the labels
+  suggest — but that decision sits upstream of any UI.
+
+Downstream once it exists: rosters, group→professor mapping and every report must
+scope by faculty, or FCCF's own numbers silently absorb everyone else's.
