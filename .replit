@@ -19,3 +19,10 @@ externalPort = 80
 
 [env]
 NEXT_TELEMETRY_DISABLED = "1"
+
+# Pins the Nix package channel, so the toolchain an import gets in January is the
+# toolchain the entry window ran on. Added by Replit's own agent on 2026-08-01
+# and adopted here rather than left in the workspace: config that only exists on
+# the host is config that disappears when the host is rebuilt.
+[nix]
+channel = "stable-25_05"
