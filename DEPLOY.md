@@ -18,6 +18,23 @@ are already configured. If the Replit agent wants to change the **port** lines,
 let it — that is the part of Replit config that moves most. Do not let it change
 `deploymentTarget` away from `autoscale`, or `build` away from `npm run build`.
 
+⚠️ **Replit starts an agent on import, and its migration skill fires on Next.js
+repos.** The first attempt at this deploy was restructured into a multi-artifact
+pnpm workspace — the app moved under `artifacts/`, npm was replaced with pnpm,
+and `next.config.ts` and `package.json` were rewritten. Nothing was broken to
+begin with; the repo arrives deployable. That workspace was discarded.
+
+`replit.md` and `AGENTS.md` are committed at the repo root to say so. Say it in
+the chat as well, before it starts:
+
+> Do not migrate or restructure. This repo has a committed `.replit` and runs
+> as-is. Do not create a pnpm workspace or artifacts, and do not modify
+> `package.json` or `next.config.ts`. Only provision the database and set
+> secrets.
+
+If it begins talking about workspaces, artifacts, or converting to Vite, stop
+the task. A restructured import is faster to delete and re-import than to untangle.
+
 ## 2. Create the database
 
 Replit → Database → create a **Postgres** instance. It sets `DATABASE_URL` for you.

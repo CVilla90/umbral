@@ -5,6 +5,12 @@
 > - **The student path works end to end, all four levels, and now includes
 >   listening and speaking.** Design is in `PLAN.md`; this file tracks state.
 > - **🔴 The entry window opens 2026-08-10.**
+> - ⚠️ **Replit's agent restructures this repo on import unless told not to.**
+>   The first attempt moved the app under `artifacts/`, replaced npm with a pnpm
+>   workspace, and rewrote `package.json` and `next.config.ts` — none of which
+>   was needed, since `.replit` ships with the repo. `replit.md` and `AGENTS.md`
+>   exist to say so, and `DEPLOY.md` §1 has the phrase to paste into the chat.
+>   A restructured import is faster to delete and re-import than to untangle.
 > - ✅ **`maxTotal` is SETTLED at 37** (Carlos, 2026-07-31): listening was
 >   authored, not deleted. `bank.test.ts` asserts 37 on all eight forms.
 >   **Do not change it again this semester** — an instrument whose maximum differs

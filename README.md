@@ -76,7 +76,10 @@ itself. The host is **`umbral-ingles.replit.app`**, which is what the Google
 OAuth redirect URI is built from.
 
 Read **`HANDOFF.md`** first — its banner carries the traps, and §1b is the
-resume procedure. **`PLAN.md`** is the design of record.
+resume procedure. **`PLAN.md`** is the design of record. **`AGENTS.md`** (and
+`replit.md`, which Replit's agent reads on import) carry the guardrails: this
+repo is configured and must not be restructured, ported, or moved into a
+workspace layout.
 
 ## Stack
 
