@@ -72,8 +72,8 @@ against the instrument rather than against invented numbers. See `HANDOFF.md §1
 
 **Not deployed yet** — the only remaining work in the project. The ordered
 procedure is in **`DEPLOY.md`**; `.replit` is committed so the import configures
-itself. Google OAuth is registered after the host exists, since the redirect URI
-needs the real URL.
+itself. The host is **`umbral-ingles.replit.app`**, which is what the Google
+OAuth redirect URI is built from.
 
 Read **`HANDOFF.md`** first — its banner carries the traps, and §1b is the
 resume procedure. **`PLAN.md`** is the design of record.

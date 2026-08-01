@@ -1,7 +1,9 @@
 # Deploying Umbral to Replit
 
-Do these in order. Steps 1–5 must all be done **before** the Google OAuth client
-exists, because the redirect URI needs the deployed host's real URL.
+Do these in order. The one hard dependency is that **the host must be decided
+before the Google OAuth client is registered**, because the redirect URI is
+built from it. That decision is made: **`umbral-ingles.replit.app`**, so step 6
+can be done at any point — it does not have to wait for the deploy.
 
 🔴 The entry window opens **2026-08-10**.
 
@@ -34,7 +36,7 @@ app to a single connection for no reason.
 | `GEMINI_API_KEY` | from `../uach_english_progress/.env` |
 | `SPEAKING_ENABLED` | `true` |
 | `ALLOWED_EMAIL_DOMAIN` | `uach.mx` |
-| `NEXT_PUBLIC_APP_URL` | the deployment URL, **no trailing slash** — fill in after step 4 |
+| `NEXT_PUBLIC_APP_URL` | `https://umbral-ingles.replit.app` — **no trailing slash** |
 | `GOOGLE_CLIENT_ID` | after step 6 |
 | `GOOGLE_CLIENT_SECRET` | after step 6 |
 
@@ -57,14 +59,16 @@ npm run db:push     # creates the tables
 npm run db:seed     # semester Ago-Dic 2026 + both windows
 ```
 
-Then Deploy. Once it is live, set `NEXT_PUBLIC_APP_URL` to the real URL and
-redeploy so the OAuth redirect is built against the right origin.
+Then Deploy, claiming the subdomain **`umbral-ingles`**. The host is known ahead
+of time, so `NEXT_PUBLIC_APP_URL` can be set in step 3 rather than after — but
+if you change the subdomain later, that variable and both Google entries all
+have to change together.
 
 ## 5. Confirm the dev doors are shut
 
 ```bash
-curl -i https://<your-host>/api/auth/dev
-curl -i https://<your-host>/api/dev/demo
+curl -i https://umbral-ingles.replit.app/api/auth/dev
+curl -i https://umbral-ingles.replit.app/api/dev/demo
 ```
 
 **Both must return 404.** Not 403 — 404, so a prober cannot even learn the route
@@ -75,11 +79,28 @@ before going further.
 
 Google Cloud console, inside the **`@uach.mx`** organisation:
 
-- Authorized JavaScript origin: `https://<your-host>`
-- Authorized redirect URI: `https://<your-host>/api/auth/google/callback`
+- Authorized JavaScript origin: `https://umbral-ingles.replit.app`
+- Authorized redirect URI:
+  `https://umbral-ingles.replit.app/api/auth/google/callback`
 
-It must match `NEXT_PUBLIC_APP_URL` exactly — same scheme, same host, no
-trailing slash. Put the client id and secret in Secrets and redeploy.
+The path is not arbitrary — it is built in `src/lib/auth/google.ts` as
+`appUrl() + "/api/auth/google/callback"`. It must match `NEXT_PUBLIC_APP_URL`
+exactly: same scheme, same host, no trailing slash. Put the client id and secret
+in Secrets and redeploy.
+
+Register a second pair at the same time so local work never needs another visit
+to the console — Google permits plain `http` for localhost specifically:
+
+- Origin: `http://localhost:3000`
+- Redirect: `http://localhost:3000/api/auth/google/callback`
+
+⚠️ The Replit **workspace preview** runs on a different host (a long
+`*.replit.dev` URL), so signing in from the preview pane fails with
+`redirect_uri_mismatch` even when the setup is correct. Test on the deployment.
+
+⚠️ A new client can take **5 minutes to a few hours** to propagate. If the first
+attempt errors, wait before editing anything — re-editing mid-propagation is how
+a correct config turns into three wrong ones.
 
 ## 7. Check the real thing
 
